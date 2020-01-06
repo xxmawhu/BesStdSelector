@@ -32,9 +32,8 @@
 // #include "DecayChain/Function/DCSelectionFunction.h"
 #include "OmegaXiKAlg/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Kaon : public DCSFKaon
-{
-  public:
+class OmegaXiKSLT::Kaon : public DCSFKaon {
+   public:
     Kaon(const std::string& JvcName = "OmegaXiKSelectorKaon",
          const double& VrCut = 1.0, const double& VzCut = 10.0);
 
@@ -45,7 +44,7 @@ class OmegaXiKSLT::Kaon : public DCSFKaon
     // DstMdcKalTrack::kaon = 3;
     void setPIDType(int type) { m_pidtype = type; }
 
-  private:
+   private:
     Kaon(const Kaon&);
     const Kaon& operator=(const Kaon&);
 

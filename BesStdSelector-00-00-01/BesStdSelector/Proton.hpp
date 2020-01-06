@@ -32,11 +32,9 @@
 // #include "DecayChain/Function/DCSelectionFunction.h"
 #include "OmegaXiKAlg/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Proton : public DCSFProton
-{
-  public:
-    Proton(const std::string& JvcName = "OmegaXiKSelectorProton",
-           const double& VrCut = 1.0, const double& VzCut = 10.0);
+class BesStdSelector::Proton : public DCSFProton {
+   public:
+    Proton(const std::string& JvcName = "primaryProton");
 
     bool operator()(CDProton& aProton);
 
@@ -45,7 +43,7 @@ class OmegaXiKSLT::Proton : public DCSFProton
     // DstMdcKalTrack::proton = 4;
     void setPIDType(int type) { m_pidtype = type; }
 
-  private:
+   private:
     Proton(const Proton&);
     const Proton& operator=(const Proton&);
 

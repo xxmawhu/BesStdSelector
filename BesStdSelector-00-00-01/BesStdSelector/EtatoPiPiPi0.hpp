@@ -32,14 +32,13 @@
 // #include "DecayChain/Function/DCSelectionFunction.h"
 #include "OmegaXiKAlg/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::EtatoPiPiPi0 : public DCSFDecay
-{
-  public:
+class OmegaXiKSLT::EtatoPiPiPi0 : public DCSFDecay {
+   public:
     EtatoPiPiPi0();
 
     bool operator()(CDDecay& aEta3p);
 
-  private:
+   private:
     EtatoPiPiPi0(const EtatoPiPiPi0&);
     const EtatoPiPiPi0& operator=(const EtatoPiPiPi0&);
 

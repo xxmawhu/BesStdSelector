@@ -32,7 +32,7 @@
 #include "VertexFit/VertexFit.h"
 #include "VertexFit/Helix.h"
 #include <string>
-namespace BesStdSelector{
+namespace BesStdSelector {
 class ProtonSelector : public DCSelectionFunction<CDProton> {
    public:
     ProtonSelector();
@@ -43,7 +43,7 @@ class ProtonSelector : public DCSelectionFunction<CDProton> {
 
    private:
     ProtonSelector(const ProtonSelector&);
-    const ProtonSelector& operator=( const ProtonSelector&);
+    const ProtonSelector& operator=(const ProtonSelector&);
 
     int m_pidtype;
 

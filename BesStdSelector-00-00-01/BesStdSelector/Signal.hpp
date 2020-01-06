@@ -30,15 +30,14 @@
 #include "OmegaXiKAlg/Namespace.hpp"
 #include "OmegaXiKAlg/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Signal : public DCSFDecay
-{
-  public:
+class OmegaXiKSLT::Signal : public DCSFDecay {
+   public:
     Signal();
 
     bool operator()(CDDecay& aSignal);
     inline void setEcm(const double& _ecm) { m_Ecm = _ecm; }
 
-  private:
+   private:
     Signal(const Signal&);
     const Signal& operator=(const Signal&);
 

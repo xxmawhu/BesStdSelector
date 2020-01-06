@@ -32,9 +32,8 @@
 // #include "DecayChain/Function/DCSelectionFunction.h"
 #include "OmegaXiKAlg/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Pion : public DCSFPion
-{
-  public:
+class OmegaXiKSLT::Pion : public DCSFPion {
+   public:
     Pion(const std::string& JvcName = "OmegaXiKSelectorPion",
          const double& VrCut = 1.0, const double& VzCut = 10.0);
 
@@ -45,7 +44,7 @@ class OmegaXiKSLT::Pion : public DCSFPion
     // DstMdcKalTrack::pion = 2;
     void setPIDType(int type) { m_pidtype = type; }
 
-  private:
+   private:
     Pion(const Pion&);
     const Pion& operator=(const Pion&);
 

@@ -39,14 +39,13 @@
  *
  * 3. pi0 pi0 eta, not implemented yet.                    22.8%
  */
-class OmegaXiKSLT::EtaP : public DCSFDecay
-{
-  public:
+class OmegaXiKSLT::EtaP : public DCSFDecay {
+   public:
     EtaP();
 
     bool operator()(CDDecay& aEtaP);
 
-  private:
+   private:
     EtaP(const EtaP&);
     const EtaP& operator=(const EtaP&);
 

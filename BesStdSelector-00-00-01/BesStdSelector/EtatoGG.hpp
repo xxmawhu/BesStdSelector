@@ -32,14 +32,13 @@
 // #include "DecayChain/Function/DCSelectionFunction.h"
 #include "OmegaXiKAlg/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::EtatoGG : public DCSFEta
-{
-  public:
+class OmegaXiKSLT::EtatoGG : public DCSFEta {
+   public:
     EtatoGG();
 
     bool operator()(CDEta& aEta);
 
-  private:
+   private:
     EtatoGG(const EtatoGG&);
     const EtatoGG& operator=(const EtatoGG&);
 

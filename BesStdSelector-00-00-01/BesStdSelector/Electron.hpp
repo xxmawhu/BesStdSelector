@@ -32,16 +32,15 @@
 // #include "DecayChain/Function/DCSelectionFunction.h"
 #include "OmegaXiKAlg/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Electron : public DCSFElectron
-{
-  public:
+class OmegaXiKSLT::Electron : public DCSFElectron {
+   public:
     Electron();
 
     inline void setCharge(int chr) { m_charge = chr; }
 
     bool operator()(CDElectron& aElectron);
 
-  private:
+   private:
     Electron(const Electron&);
     const Electron& operator=(const Electron&);
 

@@ -32,16 +32,15 @@
 // #include "DecayChain/Function/DCSelectionFunction.h"
 #include "OmegaXiKAlg/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Ds : public DCSFDecay
-{
-  public:
+class OmegaXiKSLT::Ds : public DCSFDecay {
+   public:
     Ds();
 
     inline void setBeamE(double ebeam) { m_Ecm = ebeam; }
 
     bool operator()(CDDecay& aDs);
 
-  private:
+   private:
     Ds(const Ds&);
 
     const Ds& operator=(const Ds&);

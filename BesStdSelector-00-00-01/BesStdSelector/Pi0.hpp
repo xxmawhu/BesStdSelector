@@ -32,14 +32,13 @@
 // #include "DecayChain/Function/DCSelectionFunction.h"
 #include "OmegaXiKAlg/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Pi0 : public DCSFPi0
-{
-  public:
+class OmegaXiKSLT::Pi0 : public DCSFPi0 {
+   public:
     Pi0();
 
     bool operator()(CDPi0& aPi0);
 
-  private:
+   private:
     Pi0(const Pi0&);
     const Pi0& operator=(const Pi0&);
 

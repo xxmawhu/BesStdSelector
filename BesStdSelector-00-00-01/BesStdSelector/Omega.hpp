@@ -32,14 +32,13 @@
 // #include "DecayChain/Function/DCSelectionFunction.h"
 #include "OmegaXiKAlg/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Omega : public DCSFDecay
-{
-  public:
+class OmegaXiKSLT::Omega : public DCSFDecay {
+   public:
     Omega();
 
     bool operator()(CDDecay& aOmega);
 
-  private:
+   private:
     Omega(const Omega&);
     const Omega& operator=(const Omega&);
 

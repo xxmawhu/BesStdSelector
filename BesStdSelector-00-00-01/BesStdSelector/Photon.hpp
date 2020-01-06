@@ -34,9 +34,8 @@
 
 #include "EvtRecEvent/EvtRecPi0.h"
 
-class OmegaXiKSLT::Photon : public BDCSPhoton
-{
-  public:
+class OmegaXiKSLT::Photon : public BDCSPhoton {
+   public:
     Photon();
 
     bool operator()(CDPhoton& aPhoton);
@@ -44,7 +43,7 @@ class OmegaXiKSLT::Photon : public BDCSPhoton
     inline bool vetoPi0() { return m_vetoPi0; }
     inline void setEnergy(double e) { m_energy = e; }
 
-  private:
+   private:
     Photon(const Photon&);
     const Photon& operator=(const Photon&);
 
@@ -57,15 +56,15 @@ class OmegaXiKSLT::Photon : public BDCSPhoton
     double m_maxCosThetaEndcap;
     double m_minEndcapEnergy;
 
-    bool m_useTDC;    // Time-to-Digital-Converter, from EMC
-    double m_minTime; // interval: 50ns
+    bool m_useTDC;     // Time-to-Digital-Converter, from EMC
+    double m_minTime;  // interval: 50ns
     double m_maxTime;
     double m_deltaTime;
 
-    bool m_useDang; // angle between gamma shower and charged track
+    bool m_useDang;  // angle between gamma shower and charged track
     double m_minDang;
 
-    bool m_vetoPi0; // for non-single photon
+    bool m_vetoPi0;  // for non-single photon
     double m_minPi0Mass;
     double m_maxPi0Mass;
     double m_maxPi0Chisq;

@@ -9,12 +9,41 @@
 #   Describe      :
 #
 # ====================================================*/
-#ifndef  _BESSTDSELECTOR_H
-#define  _BESSTDSELECTOR_H
-
-#endif // _BESSTDSELECTOR_H
-
+#ifndef _BESSTDSELECTOR_H
+#define _BESSTDSELECTOR_H
 namespace BesStdSelector {
-    extern OmegaXiKSLT::Proton omegaXiKSelectorProtonPrimary;
-    extern OmegaXiKSLT::Proton omegaXiKSelectorProtonAll;
+class GoodChrTrk;
+class Photon;
+class Electron;
+class Kaon;
+class Proton;
+class Pion;
+
+class Lambda;
+class Ks;
+
+class Pi0;
+class EtatoGG;
+class EtatoPiPiPi0;
+class EtaP;
+
+class Sigma0;
+class CombinateParticle;
+
+extern Proton primaryProton;
+extern Proton secondaryProtonSelector;
+extern Kaon primaryKaon;
+extern Kaon secondaryKaonSelector;
+extern Pion primaryPion;
+extern Pion secondaryPionSelector;
+extern Electron primaryElectron;
+extern Electron secondaryElectronSelector;
+
+extern CombinateParticle omegaSelector;
+extern CombinateParticle Xi0Selector;
+extern CombinateParticle XipSelector;
+extern CombinateParticle Sigma0Selector;
+extern CombinateParticle SimgapSelector;
+extern CombinateParticle OmegaSelector;
 }
+#endif  // _BESSTDSELECTOR_H

@@ -33,7 +33,7 @@
 
 #include "BesStdSelector/EtatoGG.hpp"
 
-OmegaXiKSLT::EtatoGG::EtatoGG() {
+BesStdSelector::EtatoGG::EtatoGG() {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
 
@@ -46,7 +46,7 @@ OmegaXiKSLT::EtatoGG::EtatoGG() {
     jobSvc->setMyProperties("OmegaXiKSelectorEtatoGG", &m_propMgr);
 }
 
-bool OmegaXiKSLT::EtatoGG::operator()(CDEta& aEta) {
+bool BesStdSelector::EtatoGG::operator()(CDEta& aEta) {
     EvtRecEtaToGG* eta = const_cast<EvtRecEtaToGG*>(aEta.navEta());
 
     double mass = eta->unconMass();

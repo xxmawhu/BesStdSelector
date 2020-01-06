@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    GoodChrTrk.hpp
+ * File Name:    Electron.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-09-07 Sat 18:24:11 CST
+ * Created:      2019-09-06 Fri 16:12:54 CST
  * <<=====================================>>
- * Last Updated: 2019-11-18 Mon 20:10:00 CST
+ * Last Updated: 2019-12-08 Sun 19:48:42 CST
  *           By: Hao-Kai SUN
- *     Update #: 10
+ *     Update #: 53
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,34 +24,42 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_GOODCHRTRK_HPP
-#define OMEGAXIK_SELECTOR_GOODCHRTRK_HPP
+#ifndef BesStdSelector_ELECTRON_HPP
+#define BesStdSelector_ELECTRON_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
+#include "BesStdSelector/Namespace.hpp"
 // #include "BesDChain/CDElectron.h"
 // #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::GoodChrTrk : public DCSFElectron {
+class BesStdSelector::Electron : public DCSFElectron {
    public:
-    GoodChrTrk();
+    Electron();
 
-    bool operator()(CDElectron& aGCT);
     inline void setCharge(int chr) { m_charge = chr; }
 
+    bool operator()(CDElectron& aElectron);
+
    private:
-    GoodChrTrk(const GoodChrTrk&);
-    const GoodChrTrk& operator=(const GoodChrTrk&);
+    Electron(const Electron&);
+    const Electron& operator=(const Electron&);
 
     int m_charge;
 
+    bool m_useVCut;
     double m_VrCut;
     double m_VzCut;
     double m_CosThetaCut;
+
+    bool m_useEvPCut;
+    double m_minEvP;
+
+    bool m_usePID;
+    double m_majorProb;
 };
 
-extern OmegaXiKSLT::GoodChrTrk omegaXiKSelectorGoodChrTrk;
+extern BesStdSelector::Electron omegaXiKSelectorElectron;
 
-#endif /* OMEGAXIK_SELECTOR_GOODCHRTRK_HPP */
+#endif /* BesStdSelector_ELECTRON_HPP */
 /* ===================================================================<<< */
-/* ============ GoodChrTrk.hpp ends here ============= */
+/* ============= Electron.hpp ends here ============== */

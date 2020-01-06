@@ -24,17 +24,17 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_PHOTON_HPP
-#define OMEGAXIK_SELECTOR_PHOTON_HPP
+#ifndef BesStdSelector_PHOTON_HPP
+#define BesStdSelector_PHOTON_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
+#include "BesStdSelector/Namespace.hpp"
 // #include "BesDChain/BesDCSelector.h"
 // #include "BesDChain/CDPhoton.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
 #include "EvtRecEvent/EvtRecPi0.h"
 
-class OmegaXiKSLT::Photon : public BDCSPhoton {
+class BesStdSelector::Photon : public BDCSPhoton {
    public:
     Photon();
 
@@ -73,8 +73,8 @@ class OmegaXiKSLT::Photon : public BDCSPhoton {
     std::vector<const EvtRecPi0*> m_pi0s;
 };
 
-extern OmegaXiKSLT::Photon omegaXiKSelectorPhoton;
+extern BesStdSelector::Photon omegaXiKSelectorPhoton;
 
-#endif /* OMEGAXIK_SELECTOR_PHOTON_HPP */
+#endif /* BesStdSelector_PHOTON_HPP */
 /* ===================================================================<<< */
 /* ======================== Photon.hpp ends here ======================== */

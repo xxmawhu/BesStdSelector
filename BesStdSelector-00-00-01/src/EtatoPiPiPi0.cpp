@@ -37,7 +37,7 @@
 
 #include "OmegaXiKAlg/selector/EtatoPiPiPi0.hpp"
 
-OmegaXiKSLT::EtatoPiPiPi0::EtatoPiPiPi0() : m_minMass(0.40), m_maxMass(0.70)
+BesStdSelector::EtatoPiPiPi0::EtatoPiPiPi0() : m_minMass(0.40), m_maxMass(0.70)
 {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
@@ -50,13 +50,13 @@ OmegaXiKSLT::EtatoPiPiPi0::EtatoPiPiPi0() : m_minMass(0.40), m_maxMass(0.70)
     jobSvc->setMyProperties("OmegaXiKSelectorEtatoPiPiPi0", &m_propMgr);
 }
 
-bool OmegaXiKSLT::EtatoPiPiPi0::operator()(CDDecay& aEta)
+bool BesStdSelector::EtatoPiPiPi0::operator()(CDDecay& aEta)
 {
     aEta.setUserTag(1);
     double mass = aEta.mass();
     return (mass >= m_minMass) && (mass <= m_maxMass);
 }
 
-OmegaXiKSLT::EtatoPiPiPi0 omegaXiKSelectorEtatoPiPiPi0;
+BesStdSelector::EtatoPiPiPi0 omegaXiKSelectorEtatoPiPiPi0;
 /* ===================================================================<<< */
 /* ===================== EtatoPiPiPi0.cpp ends here ===================== */

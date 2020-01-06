@@ -36,7 +36,7 @@
 
 #include "OmegaXiKAlg/selector/Lambda.hpp"
 
-OmegaXiKSLT::Lambda::Lambda()
+BesStdSelector::Lambda::Lambda()
     : m_minMass(1.095)
     , m_maxMass(1.135)
     , m_maxChisq(200)
@@ -63,7 +63,7 @@ OmegaXiKSLT::Lambda::Lambda()
     jobSvc->setMyProperties("OmegaXiKSelectorLambda", &m_propMgr);
 }
 
-bool OmegaXiKSLT::Lambda::operator()(CDDecay& aLambda)
+bool BesStdSelector::Lambda::operator()(CDDecay& aLambda)
 {
     aLambda.setUserTag(3122);
 
@@ -94,6 +94,6 @@ bool OmegaXiKSLT::Lambda::operator()(CDDecay& aLambda)
     return true;
 }
 
-OmegaXiKSLT::Lambda omegaXiKSelectorLambda;
+BesStdSelector::Lambda omegaXiKSelectorLambda;
 /* ===================================================================<<< */
 /* ======================== Lambda.cpp ends here ======================== */

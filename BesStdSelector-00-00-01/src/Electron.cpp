@@ -47,7 +47,7 @@
 using CLHEP::Hep3Vector;
 using CLHEP::HepLorentzVector;
 
-OmegaXiKSLT::Electron::Electron()
+BesStdSelector::Electron::Electron()
     : m_charge(-1)
     , m_useVCut(false)
     , m_VrCut(1.0)
@@ -79,7 +79,7 @@ OmegaXiKSLT::Electron::Electron()
     jobSvc->setMyProperties("OmegaXiKSelectorElectron", &m_propMgr);
 }
 
-bool OmegaXiKSLT::Electron::operator()(CDElectron& aElectron)
+bool BesStdSelector::Electron::operator()(CDElectron& aElectron)
 {
     aElectron.setUserTag(1);
     // if(aElectron.charge() != m_charge) return false; // +- check
@@ -174,6 +174,6 @@ bool OmegaXiKSLT::Electron::operator()(CDElectron& aElectron)
     return true;
 }
 
-OmegaXiKSLT::Electron omegaXiKSelectorElectron;
+BesStdSelector::Electron omegaXiKSelectorElectron;
 /* ===================================================================<<< */
 /* ====================== Electron.cpp ends here ======================== */

@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    Sigma0.hpp
+ * File Name:    EtatoGG.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-10-21 Mon 19:06:16 CST
+ * Created:      2019-09-07 Sat 18:16:44 CST
  * <<=====================================>>
- * Last Updated: 2019-12-01 Sun 18:54:10 CST
+ * Last Updated: 2019-11-18 Mon 19:32:18 CST
  *           By: Hao-Kai SUN
- *     Update #: 15
+ *     Update #: 10
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,33 +24,31 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_SIGMA0_HPP
-#define OMEGAXIK_SELECTOR_SIGMA0_HPP
+#ifndef BesStdSelector_ETATOGG_HPP
+#define BesStdSelector_ETATOGG_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
-// #include "BesDChain/CDDecay.h"
+#include "BesStdSelector/Namespace.hpp"
+// #include "BesDChain/CDEta.h"
 // #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Sigma0 : public DCSFDecay {
+class BesStdSelector::EtatoGG : public DCSFEta {
    public:
-    Sigma0();
+    EtatoGG();
 
-    bool operator()(CDDecay& aSigma);
+    bool operator()(CDEta& aEta);
 
    private:
-    Sigma0(const Sigma0&);
-    const Sigma0& operator=(const Sigma0&);
+    EtatoGG(const EtatoGG&);
+    const EtatoGG& operator=(const EtatoGG&);
 
     double m_minMass;
     double m_maxMass;
-
-    double m_minMassTight;
-    double m_maxMassTight;
+    double m_maxChisq;
 };
 
-extern OmegaXiKSLT::Sigma0 omegaXiKSelectorSigma0;
+extern BesStdSelector::EtatoGG omegaXiKSelectorEtatoGG;
 
-#endif /* OMEGAXIK_SELECTOR_SIGMA0_HPP */
+#endif /* BesStdSelector_ETATOGG_HPP */
 /* ===================================================================<<< */
-/* ======================== Sigma0.hpp ends here ======================== */
+/* ============== EtatoGG.hpp ends here ============== */

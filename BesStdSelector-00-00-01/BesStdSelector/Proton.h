@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    Pion.hpp
+ * File Name:    Proton.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-10-21 Mon 17:21:51 CST
+ * Created:      2019-10-21 Mon 18:49:10 CST
  * <<=====================================>>
- * Last Updated: 2019-11-30 Sat 18:41:21 CST
+ * Last Updated: 2019-12-01 Sun 15:38:40 CST
  *           By: Hao-Kai SUN
- *     Update #: 12
+ *     Update #: 11
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,29 +24,28 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_PION_HPP
-#define OMEGAXIK_SELECTOR_PION_HPP
+#ifndef BesStdSelector_PROTON_HPP
+#define BesStdSelector_PROTON_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
-// #include "BesDChain/CDChargedPion.h"
+#include "BesStdSelector/Namespace.hpp"
+// #include "BesDChain/CDProton.h"
 // #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Pion : public DCSFPion {
+class BesStdSelector::Proton : public DCSFProton {
    public:
-    Pion(const std::string& JvcName = "OmegaXiKSelectorPion",
-         const double& VrCut = 1.0, const double& VzCut = 10.0);
+    Proton(const std::string& JvcName = "primaryProton");
 
-    bool operator()(CDChargedPion& aPion);
+    bool operator()(CDProton& aProton);
 
-    // RecMdcKalTrack::setPidType(RecMdcKalTrack::pion);
+    // RecMdcKalTrack::setPidType(RecMdcKalTrack::proton);
     // class RecMdcKalTrack : public DstMdcKalTrack {};
-    // DstMdcKalTrack::pion = 2;
+    // DstMdcKalTrack::proton = 4;
     void setPIDType(int type) { m_pidtype = type; }
 
    private:
-    Pion(const Pion&);
-    const Pion& operator=(const Pion&);
+    Proton(const Proton&);
+    const Proton& operator=(const Proton&);
 
     int m_pidtype;
 
@@ -57,7 +56,6 @@ class OmegaXiKSLT::Pion : public DCSFPion {
     double m_VzCut;
     double m_CosThetaCut;
 
-    bool m_useSimplePID;
     bool m_usePID;
 
     bool m_useDedx;
@@ -73,17 +71,17 @@ class OmegaXiKSLT::Pion : public DCSFPion {
 
     bool m_usePIDProb;
     double m_minPIDProb;
-    bool m_rejectKaon;
-    bool m_rejectProton;
+    bool m_rejectPionKaon;
+    bool m_rejectElectron;
 
     bool m_useLikelihood;
     bool m_useNeuronNetwork;
     std::vector<double> m_neuronNetworkValCut;
 };
 
-extern OmegaXiKSLT::Pion omegaXiKSelectorPionPrimary;
-extern OmegaXiKSLT::Pion omegaXiKSelectorPionAll;
+extern BesStdSelector::Proton omegaXiKSelectorProtonPrimary;
+extern BesStdSelector::Proton omegaXiKSelectorProtonAll;
 
-#endif /* OMEGAXIK_SELECTOR_PION_HPP */
+#endif /* BesStdSelector_PROTON_HPP */
 /* ===================================================================<<< */
-/* ========================= Pion.hpp ends here ========================= */
+/* ======================== Proton.hpp ends here ======================== */

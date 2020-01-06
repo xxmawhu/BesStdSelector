@@ -41,7 +41,7 @@
 
 #include "OmegaXiKAlg/selector/Pion.hpp"
 
-OmegaXiKSLT::Pion::Pion(const std::string& JvcName, const double& VrCut,
+BesStdSelector::Pion::Pion(const std::string& JvcName, const double& VrCut,
                         const double& VzCut)
     : m_pidtype(2)
     , m_useMag(false)
@@ -111,7 +111,7 @@ OmegaXiKSLT::Pion::Pion(const std::string& JvcName, const double& VrCut,
     jobSvc->setMyProperties(JvcName, &m_propMgr);
 }
 
-bool OmegaXiKSLT::Pion::operator()(CDChargedPion& aPion)
+bool BesStdSelector::Pion::operator()(CDChargedPion& aPion)
 {
     aPion.setUserTag(1);
 
@@ -238,13 +238,13 @@ bool OmegaXiKSLT::Pion::operator()(CDChargedPion& aPion)
     return true;
 }
 
-// void OmegaXiKSLT::Pion::setPIDType(bool dopid)
+// void BesStdSelector::Pion::setPIDType(bool dopid)
 // {
 //     m_DoPID = dopid;
 // }
 
-OmegaXiKSLT::Pion omegaXiKSelectorPionPrimary("OmegaXiKSelectorPionPrimary");
-OmegaXiKSLT::Pion omegaXiKSelectorPionAll("OmegaXiKSelectorPionAll", 10.0,
+BesStdSelector::Pion omegaXiKSelectorPionPrimary("OmegaXiKSelectorPionPrimary");
+BesStdSelector::Pion omegaXiKSelectorPionAll("OmegaXiKSelectorPionAll", 10.0,
                                           20.0);
 /* ===================================================================<<< */
 /* ========================= Pion.cpp ends here ========================= */

@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    Ks.hpp
+ * File Name:    Ds.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-09-07 Sat 12:51:35 CST
+ * Created:      2019-09-06 Fri 15:57:15 CST
  * <<=====================================>>
- * Last Updated: 2019-11-21 Thu 21:11:31 CST
+ * Last Updated: 2019-12-08 Sun 19:48:20 CST
  *           By: Hao-Kai SUN
- *     Update #: 11
+ *     Update #: 42
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,35 +24,44 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_KS_HPP
-#define OMEGAXIK_SELECTOR_KS_HPP
+#ifndef BesStdSelector_DS_HPP
+#define BesStdSelector_DS_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
-// #include "BesDChain/CDKs.h"
+#include "BesStdSelector/Namespace.hpp"
+// #include "BesDChain/CDDecay.h"
 // #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Ks : public DCSFKs {
+class BesStdSelector::Ds : public DCSFDecay {
    public:
-    Ks();
+    Ds();
 
-    bool operator()(CDKs& aKs);
+    inline void setBeamE(double ebeam) { m_Ecm = ebeam; }
+
+    bool operator()(CDDecay& aDs);
 
    private:
-    Ks(const Ks&);
-    const Ks& operator=(const Ks&);
+    Ds(const Ds&);
 
+    const Ds& operator=(const Ds&);
+
+    double m_Ecm;
+
+    bool m_useMassCut;
     double m_minMass;
     double m_maxMass;
-    double m_maxChisq;
 
-    bool m_use2ndVFit;
-    double m_maxVFitChisq;
-    double m_minFlightSig;
+    bool m_useRecCut;
+    double m_minRecMass;
+    double m_maxRecMass;
+
+    bool m_useDeltaECut;
+    double m_MinDeltaE;
+    double m_MaxDeltaE;
 };
 
-extern OmegaXiKSLT::Ks omegaXiKSelectorKs;
+extern BesStdSelector::Ds omegaXiKSelectorDs;
 
-#endif /* OMEGAXIK_SELECTOR_KS_HPP */
+#endif /* BesStdSelector_DS_HPP */
 /* ===================================================================<<< */
-/* ========================== Ks.hpp ends here ========================== */
+/* ================ Ds.hpp ends here ================= */

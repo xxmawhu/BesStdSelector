@@ -38,7 +38,7 @@
 
 #include "OmegaXiKAlg/selector/Ks.hpp"
 
-OmegaXiKSLT::Ks::Ks()
+BesStdSelector::Ks::Ks()
     : m_minMass(0.487)
     , m_maxMass(0.511)
     , m_maxChisq(20)
@@ -62,7 +62,7 @@ OmegaXiKSLT::Ks::Ks()
     jobSvc->setMyProperties("OmegaXiKSelectorKs", &m_propMgr);
 }
 
-bool OmegaXiKSLT::Ks::operator()(CDKs& aKs)
+bool BesStdSelector::Ks::operator()(CDKs& aKs)
 {
     aKs.setUserTag(310);
     KsInfo aKsInfo(aKs);
@@ -84,6 +84,6 @@ bool OmegaXiKSLT::Ks::operator()(CDKs& aKs)
     return true;
 }
 
-OmegaXiKSLT::Ks omegaXiKSelectorKs;
+BesStdSelector::Ks omegaXiKSelectorKs;
 /* ===================================================================<<< */
 /* ========================== Ks.cpp ends here ========================== */

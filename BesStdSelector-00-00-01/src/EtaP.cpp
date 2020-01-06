@@ -37,7 +37,7 @@
 
 #include "OmegaXiKAlg/selector/EtaP.hpp"
 
-OmegaXiKSLT::EtaP::EtaP() : m_minMass(0.938), m_maxMass(0.978)
+BesStdSelector::EtaP::EtaP() : m_minMass(0.938), m_maxMass(0.978)
 {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
@@ -50,13 +50,13 @@ OmegaXiKSLT::EtaP::EtaP() : m_minMass(0.938), m_maxMass(0.978)
     jobSvc->setMyProperties("OmegaXiKSelectorEtaP", &m_propMgr);
 }
 
-bool OmegaXiKSLT::EtaP::operator()(CDDecay& aEp)
+bool BesStdSelector::EtaP::operator()(CDDecay& aEp)
 {
     aEp.setUserTag(1);
     double mass = aEp.mass();
     return mass >= m_minMass && mass <= m_maxMass;
 }
 
-OmegaXiKSLT::EtaP omegaXiKSelectorEtaP;
+BesStdSelector::EtaP omegaXiKSelectorEtaP;
 /* ===================================================================<<< */
 /* ========================= EtaP.cpp ends here ========================= */

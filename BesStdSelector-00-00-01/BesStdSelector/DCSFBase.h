@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    EtatoGG.hpp
+ * File Name:    DCSFBase.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-09-07 Sat 18:16:44 CST
+ * Created:      2019-11-11 Mon 19:37:44 CST
  * <<=====================================>>
- * Last Updated: 2019-11-18 Mon 19:32:18 CST
+ * Last Updated: 2019-11-30 Sat 17:02:19 CST
  *           By: Hao-Kai SUN
- *     Update #: 10
+ *     Update #: 34
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,31 +24,34 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_ETATOGG_HPP
-#define OMEGAXIK_SELECTOR_ETATOGG_HPP
+#ifndef BesStdSelector_DCSFBASE_HPP
+#define BesStdSelector_DCSFBASE_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
-// #include "BesDChain/CDEta.h"
+// included in the following header.
 // #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesDChain/BesDCSelector.h"
 
-class OmegaXiKSLT::EtatoGG : public DCSFEta {
-   public:
-    EtatoGG();
+#include "BesDChain/CDChargedKaon.h"
+#include "BesDChain/CDChargedPion.h"
+#include "BesDChain/CDDecay.h"
+#include "BesDChain/CDElectron.h"
+#include "BesDChain/CDEta.h"
+#include "BesDChain/CDKs.h"
+#include "BesDChain/CDPhoton.h"
+#include "BesDChain/CDPi0.h"
+#include "BesDChain/CDProton.h"
 
-    bool operator()(CDEta& aEta);
+typedef DCSelectionFunction<CDDecay> DCSFDecay;
+typedef DCSelectionFunction<CDElectron> DCSFElectron;
+typedef DCSelectionFunction<CDEta> DCSFEta;
+typedef DCSelectionFunction<CDChargedKaon> DCSFKaon;
+typedef DCSelectionFunction<CDChargedPion> DCSFPion;
+typedef DCSelectionFunction<CDKs> DCSFKs;
+typedef DCSelectionFunction<CDPi0> DCSFPi0;
+typedef DCSelectionFunction<CDProton> DCSFProton;
 
-   private:
-    EtatoGG(const EtatoGG&);
-    const EtatoGG& operator=(const EtatoGG&);
+typedef BesDCSelector<CDPhoton> BDCSPhoton;
 
-    double m_minMass;
-    double m_maxMass;
-    double m_maxChisq;
-};
-
-extern OmegaXiKSLT::EtatoGG omegaXiKSelectorEtatoGG;
-
-#endif /* OMEGAXIK_SELECTOR_ETATOGG_HPP */
+#endif /* BesStdSelector_DCSFBASE_HPP */
 /* ===================================================================<<< */
-/* ============== EtatoGG.hpp ends here ============== */
+/* ======================= DCSFBase.hpp ends here ======================= */

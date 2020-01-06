@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    Signal.hpp
+ * File Name:    Ks.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-12-06 Fri 14:24:09 CST
+ * Created:      2019-09-07 Sat 12:51:35 CST
  * <<=====================================>>
- * Last Updated: 2019-12-07 Sat 17:46:18 CST
+ * Last Updated: 2019-11-21 Thu 21:11:31 CST
  *           By: Hao-Kai SUN
- *     Update #: 15
+ *     Update #: 11
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,31 +24,35 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_SIGNAL_HPP
-#define OMEGAXIK_SELECTOR_SIGNAL_HPP
+#ifndef BesStdSelector_KS_HPP
+#define BesStdSelector_KS_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesStdSelector/Namespace.hpp"
+// #include "BesDChain/CDKs.h"
+// #include "DecayChain/Function/DCSelectionFunction.h"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Signal : public DCSFDecay {
+class BesStdSelector::Ks : public DCSFKs {
    public:
-    Signal();
+    Ks();
 
-    bool operator()(CDDecay& aSignal);
-    inline void setEcm(const double& _ecm) { m_Ecm = _ecm; }
+    bool operator()(CDKs& aKs);
 
    private:
-    Signal(const Signal&);
-    const Signal& operator=(const Signal&);
+    Ks(const Ks&);
+    const Ks& operator=(const Ks&);
 
-    double m_Ecm;
+    double m_minMass;
+    double m_maxMass;
+    double m_maxChisq;
 
-    double m_minRecMass;
-    double m_maxRecMass;
+    bool m_use2ndVFit;
+    double m_maxVFitChisq;
+    double m_minFlightSig;
 };
 
-extern OmegaXiKSLT::Signal omegaXiKSelectorSignal;
+extern BesStdSelector::Ks omegaXiKSelectorKs;
 
-#endif /* OMEGAXIK_SELECTOR_SIGNAL_HPP */
+#endif /* BesStdSelector_KS_HPP */
 /* ===================================================================<<< */
-/* ======================== Signal.hpp ends here ======================== */
+/* ========================== Ks.hpp ends here ========================== */

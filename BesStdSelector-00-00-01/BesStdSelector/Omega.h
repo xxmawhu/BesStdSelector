@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    DCSFBase.hpp
+ * File Name:    Omega.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-11-11 Mon 19:37:44 CST
+ * Created:      2019-09-07 Sat 14:24:34 CST
  * <<=====================================>>
- * Last Updated: 2019-11-30 Sat 17:02:19 CST
+ * Last Updated: 2019-11-23 Sat 16:17:06 CST
  *           By: Hao-Kai SUN
- *     Update #: 34
+ *     Update #: 11
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,34 +24,37 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_DCSFBASE_HPP
-#define OMEGAXIK_SELECTOR_DCSFBASE_HPP
+#ifndef BesStdSelector_OMEGA_HPP
+#define BesStdSelector_OMEGA_HPP
 
-// included in the following header.
+#include "BesStdSelector/Namespace.hpp"
+// #include "BesDChain/CDDecay.h"
 // #include "DecayChain/Function/DCSelectionFunction.h"
-#include "BesDChain/BesDCSelector.h"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
-#include "BesDChain/CDChargedKaon.h"
-#include "BesDChain/CDChargedPion.h"
-#include "BesDChain/CDDecay.h"
-#include "BesDChain/CDElectron.h"
-#include "BesDChain/CDEta.h"
-#include "BesDChain/CDKs.h"
-#include "BesDChain/CDPhoton.h"
-#include "BesDChain/CDPi0.h"
-#include "BesDChain/CDProton.h"
+class BesStdSelector::Omega : public DCSFDecay {
+   public:
+    Omega();
 
-typedef DCSelectionFunction<CDDecay> DCSFDecay;
-typedef DCSelectionFunction<CDElectron> DCSFElectron;
-typedef DCSelectionFunction<CDEta> DCSFEta;
-typedef DCSelectionFunction<CDChargedKaon> DCSFKaon;
-typedef DCSelectionFunction<CDChargedPion> DCSFPion;
-typedef DCSelectionFunction<CDKs> DCSFKs;
-typedef DCSelectionFunction<CDPi0> DCSFPi0;
-typedef DCSelectionFunction<CDProton> DCSFProton;
+    bool operator()(CDDecay& aOmega);
 
-typedef BesDCSelector<CDPhoton> BDCSPhoton;
+   private:
+    Omega(const Omega&);
+    const Omega& operator=(const Omega&);
 
-#endif /* OMEGAXIK_SELECTOR_DCSFBASE_HPP */
+    double m_minMass;
+    double m_maxMass;
+    double m_maxChisq;
+
+    bool m_use2ndVFit;
+    double m_maxVFitChisq;
+
+    bool m_useFlightSig;
+    double m_minFlightSig;
+};
+
+extern BesStdSelector::Omega omegaXiKSelectorOmega;
+
+#endif /* BesStdSelector_OMEGA_HPP */
 /* ===================================================================<<< */
-/* ======================= DCSFBase.hpp ends here ======================= */
+/* ======================== Omega.hpp ends here ========================= */

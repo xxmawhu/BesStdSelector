@@ -37,7 +37,7 @@
 
 #include "OmegaXiKAlg/selector/Sigma0.hpp"
 
-OmegaXiKSLT::Sigma0::Sigma0()
+BesStdSelector::Sigma0::Sigma0()
     : m_minMass(1.161)
     , m_maxMass(1.222)
     , m_minMassTight(1.179)
@@ -56,7 +56,7 @@ OmegaXiKSLT::Sigma0::Sigma0()
     jobSvc->setMyProperties("OmegaXiKSelectorSigma0", &m_propMgr);
 }
 
-bool OmegaXiKSLT::Sigma0::operator()(CDDecay& aSigma0)
+bool BesStdSelector::Sigma0::operator()(CDDecay& aSigma0)
 {
     aSigma0.setUserTag(1);
     double mass = aSigma0.mass();
@@ -67,6 +67,6 @@ bool OmegaXiKSLT::Sigma0::operator()(CDDecay& aSigma0)
     return true;
 }
 
-OmegaXiKSLT::Sigma0 omegaXiKSelectorSigma0;
+BesStdSelector::Sigma0 omegaXiKSelectorSigma0;
 /* ===================================================================<<< */
 /* ======================== Sigma0.cpp ends here ======================== */

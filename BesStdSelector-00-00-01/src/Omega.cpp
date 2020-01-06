@@ -37,7 +37,7 @@
 
 #include "OmegaXiKAlg/selector/Omega.hpp"
 
-OmegaXiKSLT::Omega::Omega()
+BesStdSelector::Omega::Omega()
     : m_minMass(1.550)
     , m_maxMass(1.850)
     , m_maxChisq(400)
@@ -65,7 +65,7 @@ OmegaXiKSLT::Omega::Omega()
     jobSvc->setMyProperties("Omega", &m_propMgr);
 }
 
-bool OmegaXiKSLT::Omega::operator()(CDDecay& aOmega)
+bool BesStdSelector::Omega::operator()(CDDecay& aOmega)
 {
     aOmega.setUserTag(3334);
 
@@ -89,6 +89,6 @@ bool OmegaXiKSLT::Omega::operator()(CDDecay& aOmega)
     return true;
 }
 
-OmegaXiKSLT::Omega omegaXiKSelectorOmega;
+BesStdSelector::Omega omegaXiKSelectorOmega;
 /* ===================================================================<<< */
 /* ======================== Omega.cpp ends here ========================= */

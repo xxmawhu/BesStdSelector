@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    Ds.hpp
+ * File Name:    EtatoPiPiPi0.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-09-06 Fri 15:57:15 CST
+ * Created:      2019-09-07 Sat 18:19:50 CST
  * <<=====================================>>
- * Last Updated: 2019-12-08 Sun 19:48:20 CST
+ * Last Updated: 2019-11-18 Mon 20:06:34 CST
  *           By: Hao-Kai SUN
- *     Update #: 42
+ *     Update #: 6
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,44 +24,30 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_DS_HPP
-#define OMEGAXIK_SELECTOR_DS_HPP
+#ifndef BesStdSelector_ETATOPIPIPI0_HPP
+#define BesStdSelector_ETATOPIPIPI0_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
+#include "BesStdSelector/Namespace.hpp"
 // #include "BesDChain/CDDecay.h"
 // #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Ds : public DCSFDecay {
+class BesStdSelector::EtatoPiPiPi0 : public DCSFDecay {
    public:
-    Ds();
+    EtatoPiPiPi0();
 
-    inline void setBeamE(double ebeam) { m_Ecm = ebeam; }
-
-    bool operator()(CDDecay& aDs);
+    bool operator()(CDDecay& aEta3p);
 
    private:
-    Ds(const Ds&);
+    EtatoPiPiPi0(const EtatoPiPiPi0&);
+    const EtatoPiPiPi0& operator=(const EtatoPiPiPi0&);
 
-    const Ds& operator=(const Ds&);
-
-    double m_Ecm;
-
-    bool m_useMassCut;
     double m_minMass;
     double m_maxMass;
-
-    bool m_useRecCut;
-    double m_minRecMass;
-    double m_maxRecMass;
-
-    bool m_useDeltaECut;
-    double m_MinDeltaE;
-    double m_MaxDeltaE;
 };
 
-extern OmegaXiKSLT::Ds omegaXiKSelectorDs;
+extern BesStdSelector::EtatoPiPiPi0 omegaXiKSelectorEtatoPiPiPi0;
 
-#endif /* OMEGAXIK_SELECTOR_DS_HPP */
+#endif /* BesStdSelector_ETATOPIPIPI0_HPP */
 /* ===================================================================<<< */
-/* ================ Ds.hpp ends here ================= */
+/* =========== EtatoPiPiPi0.hpp ends here ============ */

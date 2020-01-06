@@ -38,7 +38,7 @@
 
 #include "OmegaXiKAlg/selector/Photon.hpp"
 
-OmegaXiKSLT::Photon::Photon()
+BesStdSelector::Photon::Photon()
     : m_useTDC(true), m_minTime(0.), m_maxTime(14.), m_deltaTime(10.)
 {
     IJobOptionsSvc* jobSvc;
@@ -93,7 +93,7 @@ OmegaXiKSLT::Photon::Photon()
     jobSvc->setMyProperties("OmegaXiKSelectorPhoton", &m_propMgr);
 }
 
-bool OmegaXiKSLT::Photon::operator()(CDPhoton& aPhoton)
+bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton)
 {
     aPhoton.setUserTag(1);
 
@@ -209,13 +209,13 @@ bool OmegaXiKSLT::Photon::operator()(CDPhoton& aPhoton)
     return true;
 }
 
-void OmegaXiKSLT::Photon::setPi0s(vector<const EvtRecPi0*> pi0s)
+void BesStdSelector::Photon::setPi0s(vector<const EvtRecPi0*> pi0s)
 {
     m_pi0s = pi0s;
     // return;
 }
 
-bool OmegaXiKSLT::Photon::FromPi0(int ID,
+bool BesStdSelector::Photon::FromPi0(int ID,
                                   const std::vector<const EvtRecPi0*>& _pi0s)
 {
     const EvtRecPi0* aPi0;
@@ -240,6 +240,6 @@ bool OmegaXiKSLT::Photon::FromPi0(int ID,
     return false;
 }
 
-OmegaXiKSLT::Photon omegaXiKSelectorPhoton;
+BesStdSelector::Photon omegaXiKSelectorPhoton;
 /* ===================================================================<<< */
 /* ======================== Photon.cpp ends here ======================== */

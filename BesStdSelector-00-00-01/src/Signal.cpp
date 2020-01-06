@@ -35,7 +35,7 @@
 
 using CLHEP::HepLorentzVector;
 
-OmegaXiKSLT::Signal::Signal()
+BesStdSelector::Signal::Signal()
     : m_Ecm(-999.0), m_minRecMass(1.264), m_maxRecMass(1.364)
 {
     IJobOptionsSvc* jobSvc;
@@ -51,7 +51,7 @@ OmegaXiKSLT::Signal::Signal()
     jobSvc->setMyProperties("OmegaXiKSelectorSignal", &m_propMgr);
 }
 
-bool OmegaXiKSLT::Signal::operator()(CDDecay& aSignal)
+bool BesStdSelector::Signal::operator()(CDDecay& aSignal)
 {
     if (m_Ecm < 0.) {
         std::cout << "Invalid E_cm in Selector Signal -> " << m_Ecm
@@ -71,6 +71,6 @@ bool OmegaXiKSLT::Signal::operator()(CDDecay& aSignal)
     return mass > m_minRecMass && mass < m_maxRecMass;
 }
 
-OmegaXiKSLT::Signal omegaXiKSelectorSignal;
+BesStdSelector::Signal omegaXiKSelectorSignal;
 /* ===================================================================<<< */
 /* ======================== Signal.cpp ends here ======================== */

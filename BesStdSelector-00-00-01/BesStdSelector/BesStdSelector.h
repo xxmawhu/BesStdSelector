@@ -30,6 +30,7 @@ class EtaP;
 class Sigma0;
 class CombinateParticle;
 
+extern GoodChrTrk primaryGoodChrTrkSelector;
 extern Proton primaryProton;
 extern Proton secondaryProtonSelector;
 extern Kaon primaryKaon;

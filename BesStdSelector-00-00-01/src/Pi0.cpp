@@ -33,7 +33,7 @@
 
 #include "OmegaXiKAlg/selector/Pi0.hpp"
 
-OmegaXiKSLT::Pi0::Pi0()
+BesStdSelector::Pi0::Pi0()
 {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
@@ -61,7 +61,7 @@ OmegaXiKSLT::Pi0::Pi0()
     jobSvc->setMyProperties("OmegaXiKSelectorPi0", &m_propMgr);
 }
 
-bool OmegaXiKSLT::Pi0::operator()(CDPi0& aPi0)
+bool BesStdSelector::Pi0::operator()(CDPi0& aPi0)
 {
     aPi0.setUserTag(1);
     EvtRecPi0* pi0 = const_cast<EvtRecPi0*>(aPi0.navPi0());
@@ -84,6 +84,6 @@ bool OmegaXiKSLT::Pi0::operator()(CDPi0& aPi0)
     return true;
 }
 
-OmegaXiKSLT::Pi0 omegaXiKSelectorPi0;
+BesStdSelector::Pi0 omegaXiKSelectorPi0;
 /* ===================================================================<<< */
 /* ========================= Pi0.cpp ends here ========================== */

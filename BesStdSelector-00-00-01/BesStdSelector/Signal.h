@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    Electron.hpp
+ * File Name:    Signal.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-09-06 Fri 16:12:54 CST
+ * Created:      2019-12-06 Fri 14:24:09 CST
  * <<=====================================>>
- * Last Updated: 2019-12-08 Sun 19:48:42 CST
+ * Last Updated: 2019-12-07 Sat 17:46:18 CST
  *           By: Hao-Kai SUN
- *     Update #: 53
+ *     Update #: 15
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,42 +24,31 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_ELECTRON_HPP
-#define OMEGAXIK_SELECTOR_ELECTRON_HPP
+#ifndef BesStdSelector_SIGNAL_HPP
+#define BesStdSelector_SIGNAL_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
-// #include "BesDChain/CDElectron.h"
-// #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesStdSelector/Namespace.hpp"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Electron : public DCSFElectron {
+class BesStdSelector::Signal : public DCSFDecay {
    public:
-    Electron();
+    Signal();
 
-    inline void setCharge(int chr) { m_charge = chr; }
-
-    bool operator()(CDElectron& aElectron);
+    bool operator()(CDDecay& aSignal);
+    inline void setEcm(const double& _ecm) { m_Ecm = _ecm; }
 
    private:
-    Electron(const Electron&);
-    const Electron& operator=(const Electron&);
+    Signal(const Signal&);
+    const Signal& operator=(const Signal&);
 
-    int m_charge;
+    double m_Ecm;
 
-    bool m_useVCut;
-    double m_VrCut;
-    double m_VzCut;
-    double m_CosThetaCut;
-
-    bool m_useEvPCut;
-    double m_minEvP;
-
-    bool m_usePID;
-    double m_majorProb;
+    double m_minRecMass;
+    double m_maxRecMass;
 };
 
-extern OmegaXiKSLT::Electron omegaXiKSelectorElectron;
+extern BesStdSelector::Signal omegaXiKSelectorSignal;
 
-#endif /* OMEGAXIK_SELECTOR_ELECTRON_HPP */
+#endif /* BesStdSelector_SIGNAL_HPP */
 /* ===================================================================<<< */
-/* ============= Electron.hpp ends here ============== */
+/* ======================== Signal.hpp ends here ======================== */

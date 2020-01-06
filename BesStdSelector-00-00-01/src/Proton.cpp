@@ -41,7 +41,7 @@
 
 #include "OmegaXiKAlg/selector/Proton.hpp"
 
-OmegaXiKSLT::Proton::Proton(const std::string& JvcName, const double& VrCut,
+BesStdSelector::Proton::Proton(const std::string& JvcName, const double& VrCut,
                             const double& VzCut)
     : m_pidtype(4)
     , m_useMag(false)
@@ -109,7 +109,7 @@ OmegaXiKSLT::Proton::Proton(const std::string& JvcName, const double& VrCut,
     jobSvc->setMyProperties(JvcName, &m_propMgr);
 }
 
-bool OmegaXiKSLT::Proton::operator()(CDProton& aProton)
+bool BesStdSelector::Proton::operator()(CDProton& aProton)
 {
     aProton.setUserTag(1);
 
@@ -237,9 +237,9 @@ bool OmegaXiKSLT::Proton::operator()(CDProton& aProton)
     return true;
 }
 
-OmegaXiKSLT::Proton omegaXiKSelectorProtonPrimary(
+BesStdSelector::Proton omegaXiKSelectorProtonPrimary(
     "OmegaXiKSelectorProtonPrimary");
-OmegaXiKSLT::Proton omegaXiKSelectorProtonAll("OmegaXiKSelectorProtonAll", 10.0,
+BesStdSelector::Proton omegaXiKSelectorProtonAll("OmegaXiKSelectorProtonAll", 10.0,
                                               20.0);
 /* ===================================================================<<< */
 /* ======================== Proton.cpp ends here ======================== */

@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    EtatoPiPiPi0.hpp
+ * File Name:    GoodChrTrk.h
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-09-07 Sat 18:19:50 CST
+ * Created:      2019-09-07 Sat 18:24:11 CST
  * <<=====================================>>
- * Last Updated: 2019-11-18 Mon 20:06:34 CST
+ * Last Updated: 2019-11-18 Mon 20:10:00 CST
  *           By: Hao-Kai SUN
- *     Update #: 6
+ *     Update #: 10
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,30 +24,30 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_ETATOPIPIPI0_HPP
-#define OMEGAXIK_SELECTOR_ETATOPIPIPI0_HPP
+#ifndef BesStdSelector_GOODCHRTRK_HPP
+#define BesStdSelector_GOODCHRTRK_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
-// #include "BesDChain/CDDecay.h"
+#include "BesStdSelector/BesStdSelector.h"
+// #include "BesDChain/CDElectron.h"
 // #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::EtatoPiPiPi0 : public DCSFDecay {
+class BesStdSelector::GoodChrTrk public DCSFElectron {
    public:
-    EtatoPiPiPi0();
+    GoodChrTrk();
 
-    bool operator()(CDDecay& aEta3p);
+    bool operator()(CDElectron& aGCT);
+    inline void setCharge(int chr) { m_charge = chr; }
 
    private:
-    EtatoPiPiPi0(const EtatoPiPiPi0&);
-    const EtatoPiPiPi0& operator=(const EtatoPiPiPi0&);
+    GoodChrTrk(const GoodChrTrk&);
+    const GoodChrTrk& operator=(const GoodChrTrk&);
 
-    double m_minMass;
-    double m_maxMass;
+    int m_charge;
+
+    double m_VrCut;
+    double m_VzCut;
+    double m_CosThetaCut;
 };
 
-extern OmegaXiKSLT::EtatoPiPiPi0 omegaXiKSelectorEtatoPiPiPi0;
 
-#endif /* OMEGAXIK_SELECTOR_ETATOPIPIPI0_HPP */
-/* ===================================================================<<< */
-/* =========== EtatoPiPiPi0.hpp ends here ============ */
+#endif /* BesStdSelector_GOODCHRTRK_HPP */

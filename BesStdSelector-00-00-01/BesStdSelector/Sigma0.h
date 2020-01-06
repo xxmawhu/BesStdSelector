@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    Omega.hpp
+ * File Name:    Sigma0.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-09-07 Sat 14:24:34 CST
+ * Created:      2019-10-21 Mon 19:06:16 CST
  * <<=====================================>>
- * Last Updated: 2019-11-23 Sat 16:17:06 CST
+ * Last Updated: 2019-12-01 Sun 18:54:10 CST
  *           By: Hao-Kai SUN
- *     Update #: 11
+ *     Update #: 15
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,37 +24,33 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_OMEGA_HPP
-#define OMEGAXIK_SELECTOR_OMEGA_HPP
+#ifndef BesStdSelector_SIGMA0_HPP
+#define BesStdSelector_SIGMA0_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
+#include "BesStdSelector/Namespace.hpp"
 // #include "BesDChain/CDDecay.h"
 // #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Omega : public DCSFDecay {
+class BesStdSelector::Sigma0 : public DCSFDecay {
    public:
-    Omega();
+    Sigma0();
 
-    bool operator()(CDDecay& aOmega);
+    bool operator()(CDDecay& aSigma);
 
    private:
-    Omega(const Omega&);
-    const Omega& operator=(const Omega&);
+    Sigma0(const Sigma0&);
+    const Sigma0& operator=(const Sigma0&);
 
     double m_minMass;
     double m_maxMass;
-    double m_maxChisq;
 
-    bool m_use2ndVFit;
-    double m_maxVFitChisq;
-
-    bool m_useFlightSig;
-    double m_minFlightSig;
+    double m_minMassTight;
+    double m_maxMassTight;
 };
 
-extern OmegaXiKSLT::Omega omegaXiKSelectorOmega;
+extern BesStdSelector::Sigma0 omegaXiKSelectorSigma0;
 
-#endif /* OMEGAXIK_SELECTOR_OMEGA_HPP */
+#endif /* BesStdSelector_SIGMA0_HPP */
 /* ===================================================================<<< */
-/* ======================== Omega.hpp ends here ========================= */
+/* ======================== Sigma0.hpp ends here ======================== */

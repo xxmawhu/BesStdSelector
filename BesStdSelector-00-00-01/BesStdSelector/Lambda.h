@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    EtaP.hpp
+ * File Name:    Lambda.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-09-07 Sat 13:43:28 CST
+ * Created:      2019-09-07 Sat 14:21:10 CST
  * <<=====================================>>
- * Last Updated: 2019-11-16 Sat 18:30:53 CST
+ * Last Updated: 2019-11-23 Sat 14:14:59 CST
  *           By: Hao-Kai SUN
- *     Update #: 17
+ *     Update #: 14
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,37 +24,37 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_ETAP_HPP
-#define OMEGAXIK_SELECTOR_ETAP_HPP
+#ifndef BesStdSelector_LAMBDA_HPP
+#define BesStdSelector_LAMBDA_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
+#include "BesStdSelector/Namespace.hpp"
 // #include "BesDChain/CDDecay.h"
 // #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
-/* Main Decay Channels for Selecting EtaPrime.
- * 1. pi+ pi- eta, mass cut, PDG 957.78  0.196  MeV        42.6%
- *
- * 2. rho0 gamma, not implemented yet, rho0 -> pi+ pi-     28.9%
- *
- * 3. pi0 pi0 eta, not implemented yet.                    22.8%
- */
-class OmegaXiKSLT::EtaP : public DCSFDecay {
+class BesStdSelector::Lambda : public DCSFDecay {
    public:
-    EtaP();
+    Lambda();
 
-    bool operator()(CDDecay& aEtaP);
+    bool operator()(CDDecay& aLambda);
 
    private:
-    EtaP(const EtaP&);
-    const EtaP& operator=(const EtaP&);
+    Lambda(const Lambda&);
+    const Lambda& operator=(const Lambda&);
 
     double m_minMass;
     double m_maxMass;
+    double m_maxChisq;
+
+    bool m_use2ndVFit;
+    double m_maxVFitChisq;
+
+    bool m_useFlightSig;
+    double m_minFlightSig;
 };
 
-extern OmegaXiKSLT::EtaP omegaXiKSelectorEtaP;
+extern BesStdSelector::Lambda omegaXiKSelectorLambda;
 
-#endif /* OMEGAXIK_SELECTOR_ETAP_HPP */
+#endif /* BesStdSelector_LAMBDA_HPP */
 /* ===================================================================<<< */
-/* ========================= EtaP.hpp ends here ========================= */
+/* ======================== Lambda.hpp ends here ======================== */

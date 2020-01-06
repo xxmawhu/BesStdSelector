@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    Proton.hpp
+ * File Name:    Kaon.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-10-21 Mon 18:49:10 CST
+ * Created:      2019-09-07 Sat 11:21:03 CST
  * <<=====================================>>
- * Last Updated: 2019-12-01 Sun 15:38:40 CST
+ * Last Updated: 2019-11-30 Sat 18:48:00 CST
  *           By: Hao-Kai SUN
- *     Update #: 11
+ *     Update #: 29
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,28 +24,29 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_PROTON_HPP
-#define OMEGAXIK_SELECTOR_PROTON_HPP
+#ifndef BesStdSelector_KAON_HPP
+#define BesStdSelector_KAON_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
-// #include "BesDChain/CDProton.h"
+#include "BesStdSelector/Namespace.hpp"
+// #include "BesDChain/CDChargedKaon.h"
 // #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
-class BesStdSelector::Proton : public DCSFProton {
+class BesStdSelector::Kaon : public DCSFKaon {
    public:
-    Proton(const std::string& JvcName = "primaryProton");
+    Kaon(const std::string& JvcName = "OmegaXiKSelectorKaon",
+         const double& VrCut = 1.0, const double& VzCut = 10.0);
 
-    bool operator()(CDProton& aProton);
+    bool operator()(CDChargedKaon& aKaon);
 
-    // RecMdcKalTrack::setPidType(RecMdcKalTrack::proton);
+    // RecMdcKalTrack::setPidType(RecMdcKalTrack::kaon);
     // class RecMdcKalTrack : public DstMdcKalTrack {};
-    // DstMdcKalTrack::proton = 4;
+    // DstMdcKalTrack::kaon = 3;
     void setPIDType(int type) { m_pidtype = type; }
 
    private:
-    Proton(const Proton&);
-    const Proton& operator=(const Proton&);
+    Kaon(const Kaon&);
+    const Kaon& operator=(const Kaon&);
 
     int m_pidtype;
 
@@ -56,6 +57,7 @@ class BesStdSelector::Proton : public DCSFProton {
     double m_VzCut;
     double m_CosThetaCut;
 
+    bool m_useSimplePID;
     bool m_usePID;
 
     bool m_useDedx;
@@ -71,17 +73,17 @@ class BesStdSelector::Proton : public DCSFProton {
 
     bool m_usePIDProb;
     double m_minPIDProb;
-    bool m_rejectPionKaon;
-    bool m_rejectElectron;
+    bool m_rejectPion;
+    bool m_rejectProton;
 
     bool m_useLikelihood;
     bool m_useNeuronNetwork;
     std::vector<double> m_neuronNetworkValCut;
 };
 
-extern OmegaXiKSLT::Proton omegaXiKSelectorProtonPrimary;
-extern OmegaXiKSLT::Proton omegaXiKSelectorProtonAll;
+extern BesStdSelector::Kaon omegaXiKSelectorKaonPrimary;
+extern BesStdSelector::Kaon omegaXiKSelectorKaonAll;
 
-#endif /* OMEGAXIK_SELECTOR_PROTON_HPP */
+#endif /* BesStdSelector_KAON_HPP */
 /* ===================================================================<<< */
-/* ======================== Proton.hpp ends here ======================== */
+/* ========================= Kaon.hpp ends here ========================= */

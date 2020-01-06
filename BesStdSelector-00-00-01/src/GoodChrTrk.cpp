@@ -39,27 +39,23 @@
 #include "VertexFit/IVertexDbSvc.h"
 #include "VertexFit/VertexFit.h"
 
-#include "OmegaXiKAlg/selector/GoodChrTrk.hpp"
+#include "BesStdSelector/GoodChrTrk.h"
 
-OmegaXiKSLT::GoodChrTrk::GoodChrTrk()
-    : m_VrCut(1.0), m_VzCut(10.0), m_CosThetaCut(0.93)
-{
+BesStdSelector::GoodChrTrk::GoodChrTrk() {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
 
     PropertyMgr m_propMgr;
 
-    m_propMgr.declareProperty("RxyCut", m_VrCut);
-    m_propMgr.declareProperty("Vz0Cut", m_VzCut);
-    m_propMgr.declareProperty("CosThetaCut", m_CosThetaCut);
+    m_propMgr.declareProperty("RxyCut", m_VrCut=1.0);
+    m_propMgr.declareProperty("Vz0Cut", m_VzCut=10.0);
+    m_propMgr.declareProperty("CosThetaCut", m_CosThetaCut=0.93);
 
-    jobSvc->setMyProperties("OmegaXiKSelectorGoodChrTrk", &m_propMgr);
+    jobSvc->setMyProperties("PrimaryGoodChrTrkSelector", &m_propMgr);
 }
 
-bool OmegaXiKSLT::GoodChrTrk::operator()(CDElectron& aGoodChrTrk)
-{
+bool BesStdSelector::GoodChrTrk::operator()(CDElectron& aGoodChrTrk) {
     EvtRecTrack* recTrk = const_cast<EvtRecTrack*>(aGoodChrTrk.track());
-    // MDC track selection
     if (!recTrk->isMdcKalTrackValid()) return false;
 
     RecMdcKalTrack* mdcKalTrk = recTrk->mdcKalTrack();
@@ -70,19 +66,9 @@ bool OmegaXiKSLT::GoodChrTrk::operator()(CDElectron& aGoodChrTrk)
     Gaudi::svcLocator()->service("VertexDbSvc", vtxsvc);
     if (vtxsvc->isVertexValid()) {
         double* dbv = vtxsvc->PrimaryVertex();
-        // double* vv  = vtxsvc->SigmaPrimaryVertex();
-        // for (int i = 0; i < 3; ++i) {
-        //     if (vv[i] > 0.5 * dbv[i])
-        //         std::cout << "WARNING: VertexVal " << i + 1 << " : " <<
-        //         dbv[i]
-        //                   << ", Sigma : " << vv[i] << std::endl;
-        // }
         xorigin.set(dbv[0], dbv[1], dbv[2]);
-        // xorigin.setX(dbv[0]);
-        // xorigin.setY(dbv[1]);
-        // xorigin.setZ(dbv[2]);
     }
-    HepVector a     = mdcKalTrk->getZHelix();
+    HepVector a = mdcKalTrk->getZHelix();
     HepSymMatrix Ea = mdcKalTrk->getZError();
     HepPoint3D point0(0., 0., 0.);
     HepPoint3D IP(xorigin[0], xorigin[1], xorigin[2]);
@@ -91,17 +77,15 @@ bool OmegaXiKSLT::GoodChrTrk::operator()(CDElectron& aGoodChrTrk)
     HepVector vecipa = helixip3.a();
 
     double dr = fabs(vecipa[0]);
-    if (dr >= m_VrCut) return false;
-
     double dz = fabs(vecipa[3]);
-    if (dz >= m_VzCut) return false;
-
     double costheta = cos(mdcKalTrk->theta());
-    if (fabs(costheta) >= m_CosThetaCut) return false;
+    if (dr > m_VrCut || dz > m_VzCut || fabs(costheta) > m_CosThetaCut){
+        return false;
+    }
 
     return true;
 }
 
-OmegaXiKSLT::GoodChrTrk omegaXiKSelectorGoodChrTrk;
+BesStdSelector::GoodChrTrk omegaXiKSelectorGoodChrTrk;
 /* ===================================================================<<< */
 /* ===================== GoodChrTrk.cpp ends here ======================= */

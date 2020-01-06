@@ -37,7 +37,7 @@
 using CLHEP::Hep3Vector;
 using CLHEP::HepLorentzVector;
 
-OmegaXiKSLT::Ds::Ds()
+BesStdSelector::Ds::Ds()
     : m_Ecm(4.178 / 2.0)
     , m_useMassCut(false)
     , m_minMass(1.90)
@@ -62,7 +62,7 @@ OmegaXiKSLT::Ds::Ds()
     jobSvc->setMyProperties("OmegaXiKSelectorDs", &m_propMgr);
 }
 
-bool OmegaXiKSLT::Ds::operator()(CDDecay& aDs) {
+bool BesStdSelector::Ds::operator()(CDDecay& aDs) {
     if (m_useMassCut) {
         double mass = aDs.mass();
         if (mass < m_minMass || mass > m_maxMass) return false;
@@ -79,6 +79,6 @@ bool OmegaXiKSLT::Ds::operator()(CDDecay& aDs) {
     return true;
 }
 
-OmegaXiKSLT::Ds omegaXiKSelectorDs;
+BesStdSelector::Ds omegaXiKSelectorDs;
 /* ===================================================================<<< */
 /* ========================== Ds.cpp ends here ========================== */

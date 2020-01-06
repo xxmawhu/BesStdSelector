@@ -1,11 +1,11 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    Kaon.hpp
+ * File Name:    Pion.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
- * Created:      2019-09-07 Sat 11:21:03 CST
+ * Created:      2019-10-21 Mon 17:21:51 CST
  * <<=====================================>>
- * Last Updated: 2019-11-30 Sat 18:48:00 CST
+ * Last Updated: 2019-11-30 Sat 18:41:21 CST
  *           By: Hao-Kai SUN
- *     Update #: 29
+ *     Update #: 12
  * <<======== COPYRIGHT && LICENSE =======>>
  *
  * Copyright © 2019 SUN Hao-Kai <spin.hk@outlook.com>. All rights reserved.
@@ -24,29 +24,29 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef OMEGAXIK_SELECTOR_KAON_HPP
-#define OMEGAXIK_SELECTOR_KAON_HPP
+#ifndef BesStdSelector_PION_HPP
+#define BesStdSelector_PION_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
-// #include "BesDChain/CDChargedKaon.h"
+#include "BesStdSelector/Namespace.hpp"
+// #include "BesDChain/CDChargedPion.h"
 // #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesStdSelector/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Kaon : public DCSFKaon {
+class BesStdSelector::Pion : public DCSFPion {
    public:
-    Kaon(const std::string& JvcName = "OmegaXiKSelectorKaon",
+    Pion(const std::string& JvcName = "OmegaXiKSelectorPion",
          const double& VrCut = 1.0, const double& VzCut = 10.0);
 
-    bool operator()(CDChargedKaon& aKaon);
+    bool operator()(CDChargedPion& aPion);
 
-    // RecMdcKalTrack::setPidType(RecMdcKalTrack::kaon);
+    // RecMdcKalTrack::setPidType(RecMdcKalTrack::pion);
     // class RecMdcKalTrack : public DstMdcKalTrack {};
-    // DstMdcKalTrack::kaon = 3;
+    // DstMdcKalTrack::pion = 2;
     void setPIDType(int type) { m_pidtype = type; }
 
    private:
-    Kaon(const Kaon&);
-    const Kaon& operator=(const Kaon&);
+    Pion(const Pion&);
+    const Pion& operator=(const Pion&);
 
     int m_pidtype;
 
@@ -73,7 +73,7 @@ class OmegaXiKSLT::Kaon : public DCSFKaon {
 
     bool m_usePIDProb;
     double m_minPIDProb;
-    bool m_rejectPion;
+    bool m_rejectKaon;
     bool m_rejectProton;
 
     bool m_useLikelihood;
@@ -81,9 +81,9 @@ class OmegaXiKSLT::Kaon : public DCSFKaon {
     std::vector<double> m_neuronNetworkValCut;
 };
 
-extern OmegaXiKSLT::Kaon omegaXiKSelectorKaonPrimary;
-extern OmegaXiKSLT::Kaon omegaXiKSelectorKaonAll;
+extern BesStdSelector::Pion omegaXiKSelectorPionPrimary;
+extern BesStdSelector::Pion omegaXiKSelectorPionAll;
 
-#endif /* OMEGAXIK_SELECTOR_KAON_HPP */
+#endif /* BesStdSelector_PION_HPP */
 /* ===================================================================<<< */
-/* ========================= Kaon.hpp ends here ========================= */
+/* ========================= Pion.hpp ends here ========================= */

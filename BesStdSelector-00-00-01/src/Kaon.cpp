@@ -44,7 +44,7 @@
 using CLHEP::Hep3Vector;
 using CLHEP::HepLorentzVector;
 
-OmegaXiKSLT::Kaon::Kaon(const std::string& JvcName, const double& VrCut,
+BesStdSelector::Kaon::Kaon(const std::string& JvcName, const double& VrCut,
                         const double& VzCut)
     : m_pidtype(3)
     , m_useMag(false)
@@ -114,7 +114,7 @@ OmegaXiKSLT::Kaon::Kaon(const std::string& JvcName, const double& VrCut,
     jobSvc->setMyProperties(JvcName, &m_propMgr);
 }
 
-bool OmegaXiKSLT::Kaon::operator()(CDChargedKaon& aKaon)
+bool BesStdSelector::Kaon::operator()(CDChargedKaon& aKaon)
 {
     aKaon.setUserTag(1);
 
@@ -240,8 +240,8 @@ bool OmegaXiKSLT::Kaon::operator()(CDChargedKaon& aKaon)
     return true;
 }
 
-OmegaXiKSLT::Kaon omegaXiKSelectorKaonPrimary("OmegaXiKSelectorKaonPrimary");
-OmegaXiKSLT::Kaon omegaXiKSelectorKaonAll("OmegaXiKSelectorKaonAll", 10.0,
+BesStdSelector::Kaon omegaXiKSelectorKaonPrimary("OmegaXiKSelectorKaonPrimary");
+BesStdSelector::Kaon omegaXiKSelectorKaonAll("OmegaXiKSelectorKaonAll", 10.0,
                                           20.0);
 /* ===================================================================<<< */
 /* ========================= Kaon.cpp ends here ========================= */

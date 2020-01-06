@@ -32,7 +32,7 @@
 // #include "DecayChain/Function/DCSelectionFunction.h"
 #include "OmegaXiKAlg/selector/DCSFBase.hpp"
 
-class OmegaXiKSLT::Pi0 : public DCSFPi0 {
+class BesStdSelector::Pi0 : public DCSFPi0 {
    public:
     Pi0();
 
@@ -49,7 +49,7 @@ class OmegaXiKSLT::Pi0 : public DCSFPi0 {
     double m_minRho;
 };
 
-extern OmegaXiKSLT::Pi0 omegaXiKSelectorPi0;
+extern BesStdSelector::Pi0 omegaXiKSelectorPi0;
 
 #endif /* OMEGAXIK_SELECTOR_PI0_HPP */
 /* ===================================================================<<< */

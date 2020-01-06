@@ -1,4 +1,4 @@
-package BeSelector
+package BesStdSelector
 
 author Xinxin Ma <maxx@ihep.ac.cn>
 
@@ -6,18 +6,18 @@ use BesPolicy        BesPolicy-*
 
 use GaudiInterface   GaudiInterface-*   External
 
-use McTruth             McTruth-*               Event
-use EventModel          EventModel-*            Event
+# use McTruth             McTruth-*               Event
+# use EventModel          EventModel-*            Event
 use BesDChain           BesDChain-*           Event
 use EvtRecEvent         EvtRecEvent-*           Event
 use ParticleID          ParticleID-*            Analysis
 use VertexFit           VertexFit-*             Analysis
 
-use McDecayModeSvc      McDecayModeSvc-*        Utilities
+# use McDecayModeSvc      McDecayModeSvc-*        Utilities
 use GammaConv           GammaConv-*             Utilities
-use MCTruthMatchSvc     MCTruthMatchSvc-*       Utilities
+# use MCTruthMatchSvc     MCTruthMatchSvc-*       Utilities
 use HadronInfo          HadronInfo-*            Utilities
-use DataBaseReader      DataBaseReader-*        Utilities
+# use DataBaseReader      DataBaseReader-*        Utilities
 
 macro_append BeSelector_cppflags
 

@@ -36,3 +36,4 @@
 *.csh
 x86*
 cmt/Makefile
+.gitignore

@@ -1,0 +1,69 @@
+ApplicationMgr.DLLs += {"BeSelector"};
+ApplicationMgr.TopAlg += { "BeSelector" };
+
+ApplicationMgr.DLLs += {"MCTruthMatchSvc" };
+ApplicationMgr.DLLs += {"McDecayModeSvc" };
+//ApplicationMgr.DLLs += {"Selector" };
+ApplicationMgr.ExtSvc      += {"McDecayModeSvc/McDecayModeSvc"};
+McDecayModeSvc.pdt_file = "$BESEVTGENROOT/share/pdt.table";
+McDecayModeSvc.NoTracingList = { 321, -321, 211, -211 };
+VeeVertex.LambdaReconstruction = false ;
+VeeVertex.KShortReconstruction = true ; 
+#include "$ABSCORROOT/share/jobOptions_AbsCor.txt"
+// pi0 and eta
+// #include "$PI0ETATOGGRECALGROOT/share/jobOptions_Pi0EtaToGGRec.txt"
+// Pi0EtaToGGRecAlg.PhotonInBarrelOrEndcap = true;
+// Pi0EtaToGGRecAlg.PhotonApplyTimeCut = true;
+// Pi0EtaToGGRecAlg.RejectBothInEndcap = true;
+
+// BeSelector.Debug = false;
+BeSelector.FID = {2212, -2212, 3122, -3122};
+BeSelector.Mother = 9030443;
+BeSelector.MinChargedTracks = 6;
+BeSelector.MessageLevel = 0;
+BeSelector.FillMCInf = true;
+BeSelector.DoMatch = false;
+BeSelector.BeamE = 4.600;
+
+BeSelectorKsSelector.DoSecondaryVFit = false;
+
+// primary proton from IP
+BeSelectorPrimaryProtonSelector.RxyCut = 1.0;
+BeSelectorPrimaryProtonSelector.Vz0Cut = 10.0;
+BeSelectorPrimaryProtonSelector.DoPID = true;
+
+// secondary proton from second vertex
+BeSelectorSecondaryProtonSelector.RxyCut = 10.0;
+BeSelectorSecondaryProtonSelector.Vz0Cut = 20.0;
+BeSelectorSecondaryProtonSelector.DoPID = true;
+
+// pions from IP
+BeSelectorPrimaryPionSelector.RxyCut = 1.0;
+BeSelectorPrimaryPionSelector.Vz0Cut = 10.0;
+BeSelectorPrimaryPionSelector.DoPID = false;
+
+// pions from second vertex
+BeSelectorSecondaryPionSelector.RxyCut = 10.0;
+BeSelectorSecondaryPionSelector.Vz0Cut = 20.0;
+BeSelectorSecondaryPionSelector.DoPID = false;
+
+// J/psi
+BeSelectorSignalSelector.UseRecMassCuts = false;
+BeSelectorSignalSelector.UseMassCuts = false;
+
+// kaons
+BeSelectorKaonSelector.RxyCut = 1;
+BeSelectorKaonSelector.Vz0Cut = 10;
+BeSelectorKaonSelector.DoPID = true;
+
+BeSelectorGoodChrTrkSelector.RxyCut = 10;
+BeSelectorGoodChrTrkSelector.Vz0Cut = 20;
+
+// pi0
+BeSelectorPi0Selector.Pi0MinMassCut = 0.115;
+BeSelectorPi0Selector.Pi0MaxMassCut = 0.150;
+BeSelectorPi0Selector.Pi0MaxChisqCut = 200;
+
+// eta -> gamma gamma
+BeSelectorEtatoGGSelector.EtaMinMassCut = 0.50;
+BeSelectorEtatoGGSelector.EtaMaxMassCut = 0.57;

@@ -31,13 +31,14 @@ class Sigma0;
 class CombinateParticle;
 
 extern GoodChrTrk primaryGoodChrTrkSelector;
+extern Photon soloPhotonSelector;
 extern Proton primaryProton;
 extern Proton secondaryProtonSelector;
 extern Kaon primaryKaon;
 extern Kaon secondaryKaonSelector;
 extern Pion primaryPion;
 extern Pion secondaryPionSelector;
-extern Electron primaryElectron;
+extern Electron primaryElectronSelector;
 extern Electron secondaryElectronSelector;
 
 extern CombinateParticle omegaSelector;

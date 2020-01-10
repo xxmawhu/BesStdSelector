@@ -28,14 +28,14 @@
 #define BesStdSelector_GOODCHRTRK_HPP
 
 #include "BesStdSelector/BesStdSelector.h"
-// #include "BesDChain/CDElectron.h"
-// #include "DecayChain/Function/DCSelectionFunction.h"
+#include "DecayChain/Function/DCSelectionFunction.h"
+#include "BesDChain/CDChargedPion.h"
 
-class BesStdSelector::GoodChrTrk public DCSFElectron {
+class BesStdSelector::GoodChrTrk public DCSelectionFunction<CDChargedPion> {
    public:
     GoodChrTrk();
 
-    bool operator()(CDElectron& aGCT);
+    bool operator()(CDChargedPion& aGCT);
     inline void setCharge(int chr) { m_charge = chr; }
 
    private:
@@ -48,6 +48,5 @@ class BesStdSelector::GoodChrTrk public DCSFElectron {
     double m_VzCut;
     double m_CosThetaCut;
 };
-
 
 #endif /* BesStdSelector_GOODCHRTRK_HPP */

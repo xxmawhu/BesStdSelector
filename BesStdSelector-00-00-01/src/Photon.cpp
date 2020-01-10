@@ -31,15 +31,12 @@
 #include "GaudiKernel/ISvcLocator.h"
 #include "GaudiKernel/PropertyMgr.h"
 #include "GaudiKernel/SmartDataPtr.h"
-
 #include "EventModel/EventModel.h"
 #include "EvtRecEvent/EvtRecEvent.h"
 #include "EvtRecEvent/EvtRecTrack.h"
-
-#include "OmegaXiKAlg/selector/Photon.hpp"
+#include "BesStdSelector/Photon.h"
 
 BesStdSelector::Photon::Photon()
-    : m_useTDC(true), m_minTime(0.), m_maxTime(14.), m_deltaTime(10.)
 {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
@@ -90,7 +87,7 @@ BesStdSelector::Photon::Photon()
     m_propMgr.declareProperty("MaxPi0Mass", m_maxPi0Mass = 0.150);
     m_propMgr.declareProperty("MaxPi0Chisq", m_maxPi0Chisq = 200);
 
-    jobSvc->setMyProperties("OmegaXiKSelectorPhoton", &m_propMgr);
+    jobSvc->setMyProperties("SoloPhotonSelector", &m_propMgr);
 }
 
 bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton)
@@ -201,7 +198,7 @@ bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton)
 
     if (m_vetoPi0) {
         int ID = recTrk->trackId();
-        if (FromPi0(ID, m_pi0s)) {
+        if (FromPi0(ID, m_googPi0List)) {
             return false;
         }
     }
@@ -211,35 +208,36 @@ bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton)
 
 void BesStdSelector::Photon::setPi0s(vector<const EvtRecPi0*> pi0s)
 {
-    m_pi0s = pi0s;
-    // return;
+    m_googPi0List = pi0s;
 }
 
 bool BesStdSelector::Photon::FromPi0(int ID,
                                   const std::vector<const EvtRecPi0*>& _pi0s)
 {
     const EvtRecPi0* aPi0;
+    double mass, chisq;
+    int tmp_id;
     for (unsigned i = 0; i < _pi0s.size(); ++i) {
         aPi0 = _pi0s[i];
 
-        double mass = aPi0->unconMass();
+        mass = aPi0->unconMass();
         if (mass < m_minPi0Mass || mass > m_maxPi0Mass) continue;
 
-        double chisq = aPi0->chisq();
+        chisq = aPi0->chisq();
         if (chisq > m_maxPi0Chisq) continue;
 
         // const EvtRecTrack* hiEnGamma = aPi0->hiEnGamma();
         // const EvtRecTrack* loEnGamma = aPi0->loEnGamma();
-        int id1 = const_cast<EvtRecTrack*>(aPi0->hiEnGamma())->trackId();
-        if (ID == id1) return true;
+        tmp_id = const_cast<EvtRecTrack*>(aPi0->hiEnGamma())->trackId();
+        if (ID == tmp_id) return true;
 
-        id1 = const_cast<EvtRecTrack*>(aPi0->loEnGamma())->trackId();
-        if (ID == id1) return true;
+        tmp_id = const_cast<EvtRecTrack*>(aPi0->loEnGamma())->trackId();
+        if (ID == tmp_id) return true;
     }
 
     return false;
 }
 
-BesStdSelector::Photon omegaXiKSelectorPhoton;
+BesStdSelector::Photon soloPhotonSelector;
 /* ===================================================================<<< */
 /* ======================== Photon.cpp ends here ======================== */

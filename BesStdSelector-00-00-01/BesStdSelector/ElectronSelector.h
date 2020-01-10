@@ -22,7 +22,7 @@ class BeSelectorElectronSelector : public DCSelectionFunction<CDElectron> {
     BeSelectorElectronSelector();
 
     bool operator()(CDElectron &aEle);
-    inline void setcharge(int chr) { m_charge = chr; }
+    // inline void setcharge(int chr) { m_charge = chr; }
 
    private:
     BeSelectorElectronSelector(const BeSelectorElectronSelector &);

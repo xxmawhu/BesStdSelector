@@ -54,7 +54,7 @@ BesStdSelector::GoodChrTrk::GoodChrTrk() {
     jobSvc->setMyProperties("PrimaryGoodChrTrkSelector", &m_propMgr);
 }
 
-bool BesStdSelector::GoodChrTrk::operator()(CDElectron& aGoodChrTrk) {
+bool BesStdSelector::GoodChrTrk::operator()(CDChargedPion& aGoodChrTrk) {
     EvtRecTrack* recTrk = const_cast<EvtRecTrack*>(aGoodChrTrk.track());
     if (!recTrk->isMdcKalTrackValid()) return false;
 

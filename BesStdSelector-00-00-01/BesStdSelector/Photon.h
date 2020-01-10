@@ -28,18 +28,18 @@
 #define BesStdSelector_PHOTON_HPP
 
 #include "BesStdSelector/Namespace.hpp"
-// #include "BesDChain/BesDCSelector.h"
-// #include "BesDChain/CDPhoton.h"
-#include "BesStdSelector/selector/DCSFBase.hpp"
-
+#include "BesDChain/BesDCSelector.h"
+#include "BesDChain/CDPhoton.h"
 #include "EvtRecEvent/EvtRecPi0.h"
 
-class BesStdSelector::Photon : public BDCSPhoton {
+class BesStdSelector::Photon : public BesDCSelector<CDPhoton> {
    public:
     Photon();
 
     bool operator()(CDPhoton& aPhoton);
-    void setPi0s(std::vector<const EvtRecPi0*> m_pi0s);
+    void setPi0s(std::vector<const EvtRecPi0*> m_googPi0List);
+    void setGoodPi0List(std::vector<const EvtRecPi0*> m_googPi0List){
+    m_googPi0List = pi0s;}
     inline bool vetoPi0() { return m_vetoPi0; }
     inline void setEnergy(double e) { m_energy = e; }
 
@@ -69,11 +69,9 @@ class BesStdSelector::Photon : public BDCSPhoton {
     double m_maxPi0Mass;
     double m_maxPi0Chisq;
 
-    bool FromPi0(int id, const std::vector<const EvtRecPi0*>& m_pi0s);
-    std::vector<const EvtRecPi0*> m_pi0s;
+    bool FromPi0(int id, const std::vector<const EvtRecPi0*>& m_googPi0List);
+    std::vector<const EvtRecPi0*> m_googPi0List;
 };
-
-extern BesStdSelector::Photon omegaXiKSelectorPhoton;
 
 #endif /* BesStdSelector_PHOTON_HPP */
 /* ===================================================================<<< */

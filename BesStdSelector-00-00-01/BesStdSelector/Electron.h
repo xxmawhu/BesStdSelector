@@ -28,15 +28,15 @@
 #define BesStdSelector_ELECTRON_HPP
 
 #include "BesStdSelector/Namespace.hpp"
-// #include "BesDChain/CDElectron.h"
-// #include "DecayChain/Function/DCSelectionFunction.h"
-#include "BesStdSelector/selector/DCSFBase.hpp"
-
-class BesStdSelector::Electron : public DCSFElectron {
+#include "BesDChain/CDElectron.h"
+#include "DecayChain/Function/DCSelectionFunction.h"
+#include <string>
+class BesStdSelector::Electron : public DCSelectionFunction<CDElectron> {
    public:
-    Electron();
+    Electron(const string& name="ElectronSelector");
 
-    inline void setCharge(int chr) { m_charge = chr; }
+    // never require on the charge of a decay candidate!!!
+    // inline void setCharge(int chr) { m_charge = chr; }
 
     bool operator()(CDElectron& aElectron);
 
@@ -44,7 +44,7 @@ class BesStdSelector::Electron : public DCSFElectron {
     Electron(const Electron&);
     const Electron& operator=(const Electron&);
 
-    int m_charge;
+    // int m_charge;
 
     bool m_useVCut;
     double m_VrCut;
@@ -57,8 +57,6 @@ class BesStdSelector::Electron : public DCSFElectron {
     bool m_usePID;
     double m_majorProb;
 };
-
-extern BesStdSelector::Electron omegaXiKSelectorElectron;
 
 #endif /* BesStdSelector_ELECTRON_HPP */
 /* ===================================================================<<< */

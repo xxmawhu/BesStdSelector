@@ -34,56 +34,48 @@
 #include "VertexFit/SecondVertexFit.h"
 #include "VertexFit/VertexFit.h"
 
-#include "HadronInfo/KsInfo.hpp"
+// #include "HadronInfo/KsInfo.hpp"
 
-#include "OmegaXiKAlg/selector/Ks.hpp"
+#include "BesStdSelector/Ks.h"
 
-BesStdSelector::Ks::Ks()
-    : m_minMass(0.487)
-    , m_maxMass(0.511)
-    , m_maxChisq(20)
-    , m_use2ndVFit(false)
-    , m_maxVFitChisq(20)
-    , m_minFlightSig(2.0)
-{
+BesStdSelector::Ks::Ks() {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
 
     PropertyMgr m_propMgr;
 
-    m_propMgr.declareProperty("MinMass", m_minMass);
-    m_propMgr.declareProperty("MaxMass", m_maxMass);
-    m_propMgr.declareProperty("MaxChisq", m_maxChisq);
+    m_propMgr.declareProperty("MinMass", m_minMass = 0.487);
+    m_propMgr.declareProperty("MaxMass", m_maxMass = 0.511);
+    m_propMgr.declareProperty("MaxChisq", m_maxChisq = 200);
 
-    m_propMgr.declareProperty("Use2ndVFit", m_use2ndVFit);
-    m_propMgr.declareProperty("MaxVFitChisq", m_maxVFitChisq);
-    m_propMgr.declareProperty("MinFlightSigma", m_minFlightSig);
+    // We strongly suggest you do not cut any second vertex fit informations
+    // in the program!!
+    // m_propMgr.declareProperty("Use2ndVFit", m_use2ndVFit=false);
+    // m_propMgr.declareProperty("MaxVFitChisq", m_maxVFitChisq=200)
+    // m_propMgr.declareProperty("MinFlightSigma", m_minFlightSig=2.0);
 
-    jobSvc->setMyProperties("OmegaXiKSelectorKs", &m_propMgr);
+    jobSvc->setMyProperties("StdKsSelector", &m_propMgr);
 }
 
-bool BesStdSelector::Ks::operator()(CDKs& aKs)
-{
-    aKs.setUserTag(310);
-    KsInfo aKsInfo(aKs);
-    aKsInfo.calculate();
+bool BesStdSelector::Ks::operator()(CDKs& aKs) {
+    EvtRecVeeVertex* navKshort = const_cast<EvtRecVeeVertex*>(aKs.navKshort());
 
-    double mass = aKsInfo.m();
+    double mass = navKshort->mass();
     if (mass < m_minMass || mass > m_maxMass) return false;
-    if (aKsInfo.vtxChi2() > m_maxChisq) return false;
+    if (navKshort->chi2() > m_maxChisq) return false;
 
-    if (m_use2ndVFit) {
-        // if the ks does not meet the criteria, the information from
-        // the secondary vertex fit will not be filled (default = -999)
-        if (aKsInfo.chi2() > m_maxVFitChisq) return false;
-        if (aKsInfo.decayLengthRatio() < m_minFlightSig) return false;
-    }
-
-    aKs.setP4(aKsInfo.p4());
+    // if (m_use2ndVFit) {
+    //     // if the ks does not meet the criteria, the information from
+    //     // the secondary vertex fit will not be filled (default = -999)
+    //     if (aKsInfo.chi2() > m_maxVFitChisq) return false;
+    //     if (aKsInfo.decayLengthRatio() < m_minFlightSig) return false;
+    // }
+    //
+    // aKs.setP4(aKsInfo.p4());
 
     return true;
 }
 
-BesStdSelector::Ks omegaXiKSelectorKs;
+BesStdSelector::Ks ksSelector;
 /* ===================================================================<<< */
 /* ========================== Ks.cpp ends here ========================== */

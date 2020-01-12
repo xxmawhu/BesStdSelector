@@ -31,10 +31,9 @@
 #include "GaudiKernel/ISvcLocator.h"
 #include "GaudiKernel/PropertyMgr.h"
 
-#include "OmegaXiKAlg/selector/Pi0.hpp"
+#include "BesStdSelector/Pi0.h"
 
-BesStdSelector::Pi0::Pi0()
-{
+BesStdSelector::Pi0::Pi0() {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
 
@@ -56,16 +55,14 @@ BesStdSelector::Pi0::Pi0()
     m_propMgr.declareProperty("MinMass", m_minMass = 0.115);
     m_propMgr.declareProperty("MaxMass", m_maxMass = 0.150);
     m_propMgr.declareProperty("MaxChisq", m_maxChisq = 200.0);
+    m_propMgr.declareProperty("CutOnMag", m_CutOnMag = false);
     m_propMgr.declareProperty("MinP4Rho", m_minRho = 0.0);
 
-    jobSvc->setMyProperties("OmegaXiKSelectorPi0", &m_propMgr);
+    jobSvc->setMyProperties("Pi0Selector", &m_propMgr);
 }
 
-bool BesStdSelector::Pi0::operator()(CDPi0& aPi0)
-{
-    aPi0.setUserTag(1);
+bool BesStdSelector::Pi0::operator()(CDPi0& aPi0) {
     EvtRecPi0* pi0 = const_cast<EvtRecPi0*>(aPi0.navPi0());
-
     // The `CDPi0` also has a member named mass, which is the mass of pi0 after
     // 1C fit.However,  after 1C, the mass will become a constant,
     //  i.e 0.13497...
@@ -77,13 +74,12 @@ bool BesStdSelector::Pi0::operator()(CDPi0& aPi0)
 
     // rho() is a member function of HepLorentzVector, return the magnitude of
     // the momentum, i.e rho() = sqrt(px^2 + py^2 + pz^2)
-    if (aPi0.p4().rho() < m_minRho) return false;
-
-    if (mass < 0.115 || mass > 0.150) aPi0.setUserTag(2);
-
+    if (m_CutOnMag) {
+        if (aPi0.p4().rho() < m_minRho) return false;
+    }
     return true;
 }
 
-BesStdSelector::Pi0 omegaXiKSelectorPi0;
+BesStdSelector::Pi0 pi0Selector;
 /* ===================================================================<<< */
 /* ========================= Pi0.cpp ends here ========================== */

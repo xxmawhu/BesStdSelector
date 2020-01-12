@@ -32,48 +32,33 @@
 #include "EvtRecEvent/EvtRecVeeVertex.h"
 #include "ParticleID/ParticleID.h"
 
-#include "HadronInfo/LamInfo.hpp"
+#include "HadronInfo/LamInfo.h"
 
-#include "OmegaXiKAlg/selector/Lambda.hpp"
+#include "BesStdSelector/Lambda.h"
 
-BesStdSelector::Lambda::Lambda()
-    : m_minMass(1.095)
-    , m_maxMass(1.135)
-    , m_maxChisq(200)
-    , m_use2ndVFit(false)
-    , m_maxVFitChisq(1000)
-    , m_useFlightSig(false)
-    , m_minFlightSig(2.0)
-{
+BesStdSelector::Lambda::Lambda() {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
 
     PropertyMgr m_propMgr;
 
-    m_propMgr.declareProperty("MinMass", m_minMass);
-    m_propMgr.declareProperty("MaxMass", m_maxMass);
-    m_propMgr.declareProperty("MaxChisq", m_maxChisq);
+    m_propMgr.declareProperty("MinMass", m_minMass = 1.095);
+    m_propMgr.declareProperty("MaxMass", m_maxMass = 1.135);
+    m_propMgr.declareProperty("MaxChisq", m_maxChisq = 200);
 
-    m_propMgr.declareProperty("Use2ndVFit", m_use2ndVFit);
-    m_propMgr.declareProperty("MaxVFitChisq", m_maxVFitChisq);
+    // We strongly recommend you don't cut on the decay length
+    m_propMgr.declareProperty("Use2ndVFit", m_use2ndVFit = false);
+    m_propMgr.declareProperty("MaxVFitChisq", m_maxVFitChisq = 200);
 
-    m_propMgr.declareProperty("UseFlightSig", m_useFlightSig);
-    m_propMgr.declareProperty("MinFlightSig", m_minFlightSig);
+    m_propMgr.declareProperty("UseFlightSig", m_useFlightSig = false);
+    m_propMgr.declareProperty("MinFlightSig", m_minFlightSig = 2.0);
 
     jobSvc->setMyProperties("OmegaXiKSelectorLambda", &m_propMgr);
 }
 
-bool BesStdSelector::Lambda::operator()(CDDecay& aLambda)
-{
-    aLambda.setUserTag(3122);
-
-    EvtRecTrack* trkproton =
-        const_cast<EvtRecTrack*>(aLambda.decay().child(0).track());
-    EvtRecTrack* trkpion =
-        const_cast<EvtRecTrack*>(aLambda.decay().child(1).track());
-
+bool BesStdSelector::Lambda::operator()(CDDecay& aLambda) {
     // Need the package HadronInfo
-    LamInfo lamInfo(trkproton, trkpion);
+    LamInfo lamInfo(aLambda);
     lamInfo.calculate();
 
     double mass = lamInfo.m();
@@ -89,11 +74,13 @@ bool BesStdSelector::Lambda::operator()(CDDecay& aLambda)
         if (lamInfo.decayLengthRatio() < m_minFlightSig) return false;
     }
 
+    // Must update the moentum of Lambda candiate, the raw momentum of Lambda is
+    // just sum of protons' and pion's, the vertex fit can improve the
+    // resolution significancely
     aLambda.setP4(lamInfo.p4());
 
     return true;
 }
-
-BesStdSelector::Lambda omegaXiKSelectorLambda;
+BesStdSelector::Lambda lambdaSelector;
 /* ===================================================================<<< */
 /* ======================== Lambda.cpp ends here ======================== */

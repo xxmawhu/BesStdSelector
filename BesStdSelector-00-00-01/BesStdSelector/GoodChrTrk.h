@@ -31,7 +31,7 @@
 #include "DecayChain/Function/DCSelectionFunction.h"
 #include "BesDChain/CDChargedPion.h"
 
-class BesStdSelector::GoodChrTrk public DCSelectionFunction<CDChargedPion> {
+class BesStdSelector::GoodChrTrk : public DCSelectionFunction<CDChargedPion> {
    public:
     GoodChrTrk();
 

@@ -1,5 +1,5 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    EtaP.cpp
+ * File Name:    CombinateParticle.cpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
  * Created:      2019-10-20 Sun 13:44:44 CST
  * <<=====================================>>
@@ -35,28 +35,39 @@
 #include "GaudiKernel/ISvcLocator.h"
 #include "GaudiKernel/PropertyMgr.h"
 
-#include "OmegaXiKAlg/selector/EtaP.hpp"
+#include "BesStdSelector/CombinateParticle.h"
 
-BesStdSelector::EtaP::EtaP() : m_minMass(0.938), m_maxMass(0.978)
-{
+BesStdSelector::CombinateParticle::CombinateParticle(
+    const string& selector_name, const double& minMass, const double& maxMass) {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
 
     PropertyMgr m_propMgr;
 
-    m_propMgr.declareProperty("MinMass", m_minMass);
-    m_propMgr.declareProperty("MaxMass", m_maxMass);
+    m_propMgr.declareProperty("MinMass", m_minMass = minMass);
+    m_propMgr.declareProperty("MaxMass", m_maxMass = maxMass);
 
-    jobSvc->setMyProperties("OmegaXiKSelectorEtaP", &m_propMgr);
+    jobSvc->setMyProperties(selector_name, &m_propMgr);
 }
 
-bool BesStdSelector::EtaP::operator()(CDDecay& aEp)
-{
-    aEp.setUserTag(1);
-    double mass = aEp.mass();
-    return mass >= m_minMass && mass <= m_maxMass;
+bool BesStdSelector::CombinateParticle::operator()(CDDecay& aComb) {
+    double mass = aComb.mass();
+    if (mass < m_minMass || mass > m_maxMass) {
+        return false;
+    }
+    return true;
 }
 
-BesStdSelector::EtaP omegaXiKSelectorEtaP;
+BesStdSelector::CombinateParticle EtaPtoPiPiEtaSelector(
+    "EtaPtoPiPiEtaSelector");
+BesStdSelector::CombinateParticle EtaPtoPiPiGSelector("EtaPtoPiPiGSelector");
+BesStdSelector::CombinateParticle etatoPiPiPi0Selector("EtatoPiPiPi0Selector");
+BesStdSelector::CombinateParticle omegaSelector("omegaSelector");
+BesStdSelector::CombinateParticle Sigma0Selector("Sigma0Selector");
+BesStdSelector::CombinateParticle Xi0Selector("Xi0Selector");
+BesStdSelector::CombinateParticle XipSelector("XipSelector");
+BesStdSelector::CombinateParticle SigmapSelector("SigmapSelector");
+BesStdSelector::CombinateParticle OmegaSelector("OmegaSelector");
 /* ===================================================================<<< */
-/* ========================= EtaP.cpp ends here ========================= */
+/* ========================= CombinateParticle.cpp ends here
+ * ========================= */

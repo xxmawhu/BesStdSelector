@@ -11,6 +11,7 @@ use GaudiInterface   GaudiInterface-*   External
 use BesDChain           BesDChain-*           Event
 use EvtRecEvent         EvtRecEvent-*           Event
 use ParticleID          ParticleID-*            Analysis
+use SimplePIDSvc SimplePIDSvc-* Utilities
 use VertexFit           VertexFit-*             Analysis
 
 # use McDecayModeSvc      McDecayModeSvc-*        Utilities
@@ -19,7 +20,5 @@ use GammaConv           GammaConv-*             Utilities
 use HadronInfo          HadronInfo-*            Utilities
 # use DataBaseReader      DataBaseReader-*        Utilities
 
-macro_append BeSelector_cppflags
-
 apply_pattern component_library 
-library BeSelector *.cxx 
+library BesStdSelector *.cpp 

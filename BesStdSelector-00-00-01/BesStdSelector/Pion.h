@@ -27,15 +27,14 @@
 #ifndef BesStdSelector_PION_HPP
 #define BesStdSelector_PION_HPP
 
-#include "BesStdSelector/Namespace.hpp"
-// #include "BesDChain/CDChargedPion.h"
-// #include "DecayChain/Function/DCSelectionFunction.h"
-#include "BesStdSelector/selector/DCSFBase.hpp"
+#include "BesDChain/CDChargedPion.h"
+#include "DecayChain/Function/DCSelectionFunction.h"
+#include "BesStdSelector/BesStdSelector.h"
 
-class BesStdSelector::Pion : public DCSFPion {
+class BesStdSelector::Pion : public DCSelectionFunction<CDChargedPion> {
    public:
-    Pion(const std::string& JvcName = "OmegaXiKSelectorPion",
-         const double& VrCut = 1.0, const double& VzCut = 10.0);
+    Pion(const std::string& JvcName = "PionSelector", const double& VrCut = 1.0,
+         const double& VzCut = 10.0);
 
     bool operator()(CDChargedPion& aPion);
 
@@ -80,9 +79,6 @@ class BesStdSelector::Pion : public DCSFPion {
     bool m_useNeuronNetwork;
     std::vector<double> m_neuronNetworkValCut;
 };
-
-extern BesStdSelector::Pion omegaXiKSelectorPionPrimary;
-extern BesStdSelector::Pion omegaXiKSelectorPionAll;
 
 #endif /* BesStdSelector_PION_HPP */
 /* ===================================================================<<< */

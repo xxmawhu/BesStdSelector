@@ -53,8 +53,6 @@ class BesStdSelector::Omega : public DCSFDecay {
     double m_minFlightSig;
 };
 
-extern BesStdSelector::Omega omegaXiKSelectorOmega;
-
 #endif /* BesStdSelector_OMEGA_HPP */
 /* ===================================================================<<< */
 /* ======================== Omega.hpp ends here ========================= */

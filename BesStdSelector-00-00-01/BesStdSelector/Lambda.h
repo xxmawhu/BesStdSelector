@@ -27,12 +27,11 @@
 #ifndef BesStdSelector_LAMBDA_HPP
 #define BesStdSelector_LAMBDA_HPP
 
-#include "BesStdSelector/Namespace.hpp"
-// #include "BesDChain/CDDecay.h"
-// #include "DecayChain/Function/DCSelectionFunction.h"
-#include "BesStdSelector/selector/DCSFBase.hpp"
+#include "BesDChain/CDDecay.h"
+#include "DecayChain/Function/DCSelectionFunction.h"
+#include "BesStdSelector/BesStdSelector.h"
 
-class BesStdSelector::Lambda : public DCSFDecay {
+class BesStdSelector::Lambda : public DCSelectionFunction<CDDecay> {
    public:
     Lambda();
 
@@ -52,8 +51,6 @@ class BesStdSelector::Lambda : public DCSFDecay {
     bool m_useFlightSig;
     double m_minFlightSig;
 };
-
-extern BesStdSelector::Lambda omegaXiKSelectorLambda;
 
 #endif /* BesStdSelector_LAMBDA_HPP */
 /* ===================================================================<<< */

@@ -42,7 +42,7 @@
 #include "VertexFit/IVertexDbSvc.h"
 #include "VertexFit/VertexFit.h"
 
-#include "BesStdSelector/Electron.hpp"
+#include "BesStdSelector/Electron.h"
 
 using CLHEP::Hep3Vector;
 using CLHEP::HepLorentzVector;

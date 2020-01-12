@@ -1,3 +1,13 @@
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+// if you want to use the SimplaPIDSvc, please un-comment the following line
+// #include "$SIMPLEPIDSVCROOT/share/jobOptions_SimplePIDSvc.txt"
+
+// if you want to reconstruct pi0 or eta, please un-comment the following four line
+// #include "$PI0ETATOGGRECALGROOT/share/jobOptions_Pi0EtaToGGRec.txt"
+// Pi0EtaToGGRecAlg.PhotonInBarrelOrEndcap = true;
+// Pi0EtaToGGRecAlg.PhotonApplyTimeCut = true;
+// Pi0EtaToGGRecAlg.RejectBothInEndcap = true;
+
 ApplicationMgr.DLLs += {"BeSelector"};
 ApplicationMgr.TopAlg += { "BeSelector" };
 
@@ -10,11 +20,6 @@ McDecayModeSvc.NoTracingList = { 321, -321, 211, -211 };
 VeeVertex.LambdaReconstruction = false ;
 VeeVertex.KShortReconstruction = true ; 
 #include "$ABSCORROOT/share/jobOptions_AbsCor.txt"
-// pi0 and eta
-// #include "$PI0ETATOGGRECALGROOT/share/jobOptions_Pi0EtaToGGRec.txt"
-// Pi0EtaToGGRecAlg.PhotonInBarrelOrEndcap = true;
-// Pi0EtaToGGRecAlg.PhotonApplyTimeCut = true;
-// Pi0EtaToGGRecAlg.RejectBothInEndcap = true;
 
 // BeSelector.Debug = false;
 BeSelector.FID = {2212, -2212, 3122, -3122};

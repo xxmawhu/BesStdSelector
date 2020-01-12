@@ -36,8 +36,7 @@
 #include "EvtRecEvent/EvtRecTrack.h"
 #include "BesStdSelector/Photon.h"
 
-BesStdSelector::Photon::Photon()
-{
+BesStdSelector::Photon::Photon() {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
 
@@ -60,7 +59,7 @@ BesStdSelector::Photon::Photon()
      */
     m_propMgr.declareProperty("UseTDC", m_useTDC = true);
     m_propMgr.declareProperty("MinTime", m_minTime = 0.0);
-    m_propMgr.declareProperty("MaxTime", m_maxTime = 14.0); // unit: 50 ns
+    m_propMgr.declareProperty("MaxTime", m_maxTime = 14.0);  // unit: 50 ns
     m_propMgr.declareProperty("PhotonDeltaTime", m_deltaTime = 10);
 
     /*
@@ -90,8 +89,7 @@ BesStdSelector::Photon::Photon()
     jobSvc->setMyProperties("SoloPhotonSelector", &m_propMgr);
 }
 
-bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton)
-{
+bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton) {
     aPhoton.setUserTag(1);
 
     EvtRecTrack* recTrk = const_cast<EvtRecTrack*>(aPhoton.photon());
@@ -101,8 +99,8 @@ bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton)
     RecEmcShower* emcTrk = recTrk->emcShower();
 
     double eraw = emcTrk->energy();
-    double phi  = emcTrk->phi();
-    double the  = emcTrk->theta();
+    double phi = emcTrk->phi();
+    double the = emcTrk->theta();
     HepLorentzVector shP4(eraw * sin(the) * cos(phi),
                           eraw * sin(the) * sin(phi), eraw * cos(the), eraw);
 
@@ -148,7 +146,7 @@ bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton)
                 }
             } else {
                 RecEmcShower* firstG = (*(recTrkCol->begin()))->emcShower();
-                double deltaTime     = fabs(time - firstG->time());
+                double deltaTime = fabs(time - firstG->time());
                 if (deltaTime > 10) {
                     return false;
                 }
@@ -167,7 +165,7 @@ bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton)
             // Hep3Vector emcpos2(emcTrk->position());
             Hep3Vector emcpos(emcTrk->x(), emcTrk->y(), emcTrk->z());
 
-            double dang = 200.; // in unit of rad
+            double dang = 200.;  // in unit of rad
             // find minimum Dangle
             {
                 EvtRecTrackIterator jtTrk;
@@ -182,7 +180,7 @@ bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton)
                     if (extTrk->emcVolumeNumber() == -1) continue;
 
                     extpos = extTrk->emcPosition();
-                    angd1  = extpos.angle(emcpos);
+                    angd1 = extpos.angle(emcpos);
                     if (angd1 < dang) {
                         dang = angd1;
                     }
@@ -198,7 +196,7 @@ bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton)
 
     if (m_vetoPi0) {
         int ID = recTrk->trackId();
-        if (FromPi0(ID, m_googPi0List)) {
+        if (FromPi0(ID, m_goodPi0List)) {
             return false;
         }
     }
@@ -206,14 +204,8 @@ bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton)
     return true;
 }
 
-void BesStdSelector::Photon::setPi0s(vector<const EvtRecPi0*> pi0s)
-{
-    m_googPi0List = pi0s;
-}
-
-bool BesStdSelector::Photon::FromPi0(int ID,
-                                  const std::vector<const EvtRecPi0*>& _pi0s)
-{
+bool BesStdSelector::Photon::FromPi0(
+    int ID, const std::vector<const EvtRecPi0*>& _pi0s) {
     const EvtRecPi0* aPi0;
     double mass, chisq;
     int tmp_id;

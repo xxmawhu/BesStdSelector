@@ -35,75 +35,54 @@
 #include "GaudiKernel/PropertyMgr.h"
 
 #include "ParticleID/ParticleID.h"
+#include "SimplePIDSvc/ISimplePIDSvc.h"
 #include "VertexFit/Helix.h"
 #include "VertexFit/IVertexDbSvc.h"
 #include "VertexFit/VertexFit.h"
 
-#include "OmegaXiKAlg/selector/Kaon.hpp"
+#include "BesStdSelector/Kaon.h"
 
 using CLHEP::Hep3Vector;
 using CLHEP::HepLorentzVector;
 
 BesStdSelector::Kaon::Kaon(const std::string& JvcName, const double& VrCut,
-                        const double& VzCut)
-    : m_pidtype(3)
-    , m_useMag(false)
-    , m_minMag(0.)
-    , m_VrCut(VrCut)
-    , m_VzCut(VzCut)
-    , m_CosThetaCut(0.93)
-    , m_useSimplePID(false)
-    , m_usePID(false)
-    , m_useDedx(true)
-    , m_useTof1(true)
-    , m_useTof2(true)
-    , m_useTofE(false)
-    , m_useTofQ(false)
-    , m_useEmc(false)
-    , m_useMuc(false)
-    , m_useTof(true)
-    , m_useTofC(false)
-    , m_useTofCorr(false)
-    , m_usePIDProb(true)
-    , m_minPIDProb(0.001)
-    , m_rejectPion(true)
-    , m_rejectProton(false)
-    , m_useLikelihood(false)
-    , m_useNeuronNetwork(false)
-{
+                           const double& VzCut) {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
 
     PropertyMgr m_propMgr;
 
-    m_propMgr.declareProperty("UseP3MagCut", m_useMag);
-    m_propMgr.declareProperty("MinP3Mag", m_minMag);
+    m_propMgr.declareProperty("UseP3MagCut", m_useMag = false);
+    m_propMgr.declareProperty("MinP3Mag", m_minMag = 0.0);
 
-    m_propMgr.declareProperty("RxyCut", m_VrCut);
-    m_propMgr.declareProperty("Vz0Cut", m_VzCut);
-    m_propMgr.declareProperty("CosThetaCut", m_CosThetaCut);
+    m_propMgr.declareProperty("RxyCut", m_VrCut = 1.0);
+    m_propMgr.declareProperty("Vz0Cut", m_VzCut = 10.0);
+    m_propMgr.declareProperty("CosThetaCut", m_CosThetaCut = 0.93);
 
-    m_propMgr.declareProperty("UseSimplePID", m_useSimplePID);
-    m_propMgr.declareProperty("UsePID", m_usePID);
+    m_propMgr.declareProperty("UsePID", m_usePID = false);
+    // the simplePID is only aviable for 3.770 GeV data set.
+    m_propMgr.declareProperty("UseSimplePID", m_useSimplePID = false);
 
-    m_propMgr.declareProperty("UsePIDDedx", m_useDedx);
-    m_propMgr.declareProperty("UsePIDTof1", m_useTof1);
-    m_propMgr.declareProperty("UsePIDTof2", m_useTof2);
-    m_propMgr.declareProperty("UsePIDTofE", m_useTofE);
-    m_propMgr.declareProperty("UsePIDTofQ", m_useTofQ);
-    m_propMgr.declareProperty("UsePIDEmc", m_useEmc);
-    m_propMgr.declareProperty("UsePIDMuc", m_useMuc);
-    m_propMgr.declareProperty("UsePIDTof", m_useTof);
-    m_propMgr.declareProperty("UsePIDTofC", m_useTofC);
-    m_propMgr.declareProperty("UsePIDTofCorr", m_useTofCorr);
+    m_propMgr.declareProperty("UsePIDDedx", m_useDedx = true);
+    m_propMgr.declareProperty("UsePIDTof1", m_useTof1 = true);
+    m_propMgr.declareProperty("UsePIDTof2", m_useTof2 = true);
+    m_propMgr.declareProperty("UsePIDTofE", m_useTofE = true);
+    m_propMgr.declareProperty("UsePIDTofQ", m_useTofQ = false);
+    m_propMgr.declareProperty("UsePIDEmc", m_useEmc = false);
+    m_propMgr.declareProperty("UsePIDMuc", m_useMuc = false);
+    m_propMgr.declareProperty("UsePIDTof", m_useTof = false);
+    m_propMgr.declareProperty("UsePIDTofC", m_useTofC = false);
+    // at energy 4.178 GeV, please use TofCorr
+    m_propMgr.declareProperty("UsePIDTofCorr", m_useTofCorr = false);
 
-    m_propMgr.declareProperty("UsePIDProbability", m_usePIDProb);
-    m_propMgr.declareProperty("MinPIDProb", m_minPIDProb);
-    m_propMgr.declareProperty("RejectPion", m_rejectPion);
-    m_propMgr.declareProperty("RejectProton", m_rejectProton);
+    m_propMgr.declareProperty("UsePIDProbability", m_usePIDProb = true);
+    m_propMgr.declareProperty("MinPIDProb", m_minPIDProb = 0.001);
+    m_propMgr.declareProperty("RejectPion", m_rejectPion = true);
+    m_propMgr.declareProperty("RejectProton", m_rejectProton = true);
 
-    m_propMgr.declareProperty("UsePIDLikelihood", m_useLikelihood);
-    m_propMgr.declareProperty("UsePIDNeuronNetwork", m_useNeuronNetwork);
+    m_propMgr.declareProperty("UsePIDLikelihood", m_useLikelihood = false);
+    m_propMgr.declareProperty("UsePIDNeuronNetwork",
+                              m_useNeuronNetwork = false);
 
     // C++98 way of initializing a vector.
     m_neuronNetworkValCut.clear();
@@ -114,8 +93,7 @@ BesStdSelector::Kaon::Kaon(const std::string& JvcName, const double& VrCut,
     jobSvc->setMyProperties(JvcName, &m_propMgr);
 }
 
-bool BesStdSelector::Kaon::operator()(CDChargedKaon& aKaon)
-{
+bool BesStdSelector::Kaon::operator()(CDChargedKaon& aKaon) {
     aKaon.setUserTag(1);
 
     // WRONG: // mag = (P4.E)^2 - (P4.P3)^2, rho() = sign(mag) * sqrt(fabs(mag))
@@ -142,20 +120,10 @@ bool BesStdSelector::Kaon::operator()(CDChargedKaon& aKaon)
     Gaudi::svcLocator()->service("VertexDbSvc", vtxsvc);
     if (vtxsvc->isVertexValid()) {
         double* dbv = vtxsvc->PrimaryVertex();
-        // double* vv  = vtxsvc->SigmaPrimaryVertex();
-        // for (int i = 0; i < 3; ++i) {
-        //     if (vv[i] > 0.5 * dbv[i])
-        //         std::cout << "WARNING: VertexVal " << i + 1 << " : " <<
-        //         dbv[i]
-        //                   << ", Sigma : " << vv[i] << std::endl;
-        // }
         xorigin.set(dbv[0], dbv[1], dbv[2]);
-        // xorigin.setX(dbv[0]);
-        // xorigin.setY(dbv[1]);
-        // xorigin.setZ(dbv[2]);
     }
 
-    HepVector a     = mdcKalTrk->getZHelixK();
+    HepVector a = mdcKalTrk->getZHelixK();
     HepSymMatrix Ea = mdcKalTrk->getZErrorK();
     HepPoint3D point0(0., 0., 0.);
     HepPoint3D IP(xorigin[0], xorigin[1], xorigin[2]);
@@ -171,11 +139,6 @@ bool BesStdSelector::Kaon::operator()(CDChargedKaon& aKaon)
 
     double costheta = cos(mdcKalTrk->theta());
     if (fabs(costheta) >= m_CosThetaCut) return false;
-
-    if (m_useSimplePID) {
-        // not implement yet, need another package
-        // ${BesArea}/Utilities/SimplePIDSvc
-    }
 
     if (m_usePID) {
         ParticleID* pid = ParticleID::instance();
@@ -194,6 +157,7 @@ bool BesStdSelector::Kaon::operator()(CDChargedKaon& aKaon)
         pid->setChiMinCut(4);
         pid->setRecTrack(recTrk);
 
+        // Does this work well?
         if (m_useDedx) pid->usePidSys(pid->useDedx());
         if (m_useTof1) pid->usePidSys(pid->useTof1());
         if (m_useTof2) pid->usePidSys(pid->useTof2());
@@ -210,15 +174,15 @@ bool BesStdSelector::Kaon::operator()(CDChargedKaon& aKaon)
         if (m_rejectPion && !m_rejectProton) {
             pid->identify(pid->onlyPionKaon());
             pid->calculate();
-            pPion = pid->probPion();
-            pKaon = pid->probKaon();
-            if (!(pKaon > m_minPIDProb && pKaon > pPion))
-                aKaon.setUserTag(2 * charge);
+            if (pid->probKaon() < m_minPIDProb ||
+                pid->probKaon() < pid->probPion()) {
+                return false;
+            }
         } else if (m_rejectPion && m_rejectProton) {
             pid->identify(pid->onlyPionKaonProton());
             pid->calculate();
-            pPion   = pid->probPion();
-            pKaon   = pid->probKaon();
+            pPion = pid->probPion();
+            pKaon = pid->probKaon();
             pProton = pid->probProton();
             if (!(pKaon > m_minPIDProb && pKaon > pPion && pKaon > pProton))
                 aKaon.setUserTag(2 * charge);
@@ -230,18 +194,25 @@ bool BesStdSelector::Kaon::operator()(CDChargedKaon& aKaon)
             if (pKaon < m_minPIDProb) aKaon.setUserTag(2 * charge);
         }
 
-        if (m_pidtype == 0) { // user switch
-            return true;
-        } else {
-            if (aKaon.userTag() != 1) return false;
+        //  if (m_pidtype == 0) { // user switch
+        //      return true;
+        //  } else {
+        //      if (aKaon.userTag() != 1) return false;
+        //  }
+    } else if (m_useSimplePID) {
+        ISimplePIDSvc* m_simplePIDSvc;
+        Gaudi::svcLocator()->service("SimplePIDSvc", m_simplePIDSvc);
+
+        m_simplePIDSvc->preparePID(recTrk);
+        if (!m_simplePIDSvc->iskaon()) {
+            return false;
         }
     }
 
     return true;
 }
 
-BesStdSelector::Kaon omegaXiKSelectorKaonPrimary("OmegaXiKSelectorKaonPrimary");
-BesStdSelector::Kaon omegaXiKSelectorKaonAll("OmegaXiKSelectorKaonAll", 10.0,
-                                          20.0);
+BesStdSelector::Kaon primaryKaonSelector("PrimaryKaonSelector");
+BesStdSelector::Kaon secondaryKaonSelector("SecondaryKaonSelector", 10.0, 20.0);
 /* ===================================================================<<< */
 /* ========================= Kaon.cpp ends here ========================= */

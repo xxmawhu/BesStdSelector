@@ -32,20 +32,27 @@ class CombinateParticle;
 
 extern GoodChrTrk primaryGoodChrTrkSelector;
 extern Photon soloPhotonSelector;
-extern Proton primaryProton;
+extern Proton primaryProtonSelector;
 extern Proton secondaryProtonSelector;
-extern Kaon primaryKaon;
+extern Kaon primaryKaonSelector;
 extern Kaon secondaryKaonSelector;
-extern Pion primaryPion;
+extern Pion primaryPionSelector;
 extern Pion secondaryPionSelector;
 extern Electron primaryElectronSelector;
 extern Electron secondaryElectronSelector;
-
+extern Lambda lambdaSelector;
+extern Ks ksSelector;
+extern Pi0 pi0Selector;
+extern EtatoGG etatoGGSelector;
 extern CombinateParticle omegaSelector;
 extern CombinateParticle Xi0Selector;
 extern CombinateParticle XipSelector;
 extern CombinateParticle Sigma0Selector;
 extern CombinateParticle SimgapSelector;
 extern CombinateParticle OmegaSelector;
+
+extern CombinateParticle etatoPiPiPi0Selector;
+extern CombinateParticle EtaPtoPiPiEtaSelector;
+extern CombinateParticle EtaPtoPiPiGSelector;
 }
 #endif  // _BESSTDSELECTOR_H

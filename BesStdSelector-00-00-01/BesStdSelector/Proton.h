@@ -27,27 +27,30 @@
 #ifndef BesStdSelector_PROTON_HPP
 #define BesStdSelector_PROTON_HPP
 
-#include "BesStdSelector/Namespace.hpp"
-// #include "BesDChain/CDProton.h"
-// #include "DecayChain/Function/DCSelectionFunction.h"
-#include "BesStdSelector/selector/DCSFBase.hpp"
+#include "BesStdSelector/BesStdSelector.h"
+#include "BesDChain/CDProton.h"
+#include "DecayChain/Function/DCSelectionFunction.h"
+#include <string>
 
-class BesStdSelector::Proton : public DCSFProton {
+class BesStdSelector::Proton : public DCSelectionFunction<CDProton> {
    public:
-    Proton(const std::string& JvcName = "primaryProton");
+    Proton(const std::string& JvcName = "primaryProtonSelector",
+           const double& VrCut = 1.0, const double& VzCut = 10.0);
 
     bool operator()(CDProton& aProton);
 
     // RecMdcKalTrack::setPidType(RecMdcKalTrack::proton);
     // class RecMdcKalTrack : public DstMdcKalTrack {};
     // DstMdcKalTrack::proton = 4;
-    void setPIDType(int type) { m_pidtype = type; }
+
+    // It's not necessary to set the pid type
+    // void setPIDType(int type) { m_pidtype = type; }
 
    private:
     Proton(const Proton&);
     const Proton& operator=(const Proton&);
 
-    int m_pidtype;
+    // int m_pidtype;
 
     bool m_useMag;
     double m_minMag;
@@ -78,9 +81,6 @@ class BesStdSelector::Proton : public DCSFProton {
     bool m_useNeuronNetwork;
     std::vector<double> m_neuronNetworkValCut;
 };
-
-extern BesStdSelector::Proton omegaXiKSelectorProtonPrimary;
-extern BesStdSelector::Proton omegaXiKSelectorProtonAll;
 
 #endif /* BesStdSelector_PROTON_HPP */
 /* ===================================================================<<< */

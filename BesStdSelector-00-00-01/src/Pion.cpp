@@ -34,73 +34,50 @@
 #include "EvtRecEvent/EvtRecEvent.h"
 #include "EvtRecEvent/EvtRecTrack.h"
 #include "ParticleID/ParticleID.h"
+#include "SimplePIDSvc/ISimplePIDSvc.h"
 
 #include "VertexFit/Helix.h"
 #include "VertexFit/IVertexDbSvc.h"
 #include "VertexFit/VertexFit.h"
 
-#include "OmegaXiKAlg/selector/Pion.hpp"
+#include "BesStdSelector/Pion.h"
 
 BesStdSelector::Pion::Pion(const std::string& JvcName, const double& VrCut,
-                        const double& VzCut)
-    : m_pidtype(2)
-    , m_useMag(false)
-    , m_minMag(0.)
-    , m_VrCut(VrCut)
-    , m_VzCut(VzCut)
-    , m_CosThetaCut(0.93)
-    , m_useSimplePID(false)
-    , m_usePID(true)
-    , m_useDedx(true)
-    , m_useTof1(true)
-    , m_useTof2(true)
-    , m_useTofE(false)
-    , m_useTofQ(false)
-    , m_useEmc(false)
-    , m_useMuc(false)
-    , m_useTof(true)
-    , m_useTofC(false)
-    , m_useTofCorr(false)
-    , m_usePIDProb(true)
-    , m_minPIDProb(0.001)
-    , m_rejectKaon(true)
-    , m_rejectProton(false)
-    , m_useLikelihood(false)
-    , m_useNeuronNetwork(false)
-{
+                           const double& VzCut) {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
 
     PropertyMgr m_propMgr;
 
-    m_propMgr.declareProperty("UseP3MagCut", m_useMag);
-    m_propMgr.declareProperty("MinP3Mag", m_minMag);
+    m_propMgr.declareProperty("UseP3MagCut", m_useMag = false);
+    m_propMgr.declareProperty("MinP3Mag", m_minMag = 0.0);
 
-    m_propMgr.declareProperty("RxyCut", m_VrCut);
-    m_propMgr.declareProperty("Vz0Cut", m_VzCut);
-    m_propMgr.declareProperty("CosThetaCut", m_CosThetaCut);
+    m_propMgr.declareProperty("RxyCut", m_VrCut = VrCut);
+    m_propMgr.declareProperty("Vz0Cut", m_VzCut = VzCut);
+    m_propMgr.declareProperty("CosThetaCut", m_CosThetaCut = 0.93);
 
-    m_propMgr.declareProperty("UseSimplePID", m_useSimplePID);
-    m_propMgr.declareProperty("UsePID", m_usePID);
+    m_propMgr.declareProperty("UseSimplePID", m_useSimplePID = false);
+    m_propMgr.declareProperty("UsePID", m_usePID = true);
 
-    m_propMgr.declareProperty("UsePIDDedx", m_useDedx);
-    m_propMgr.declareProperty("UsePIDTof1", m_useTof1);
-    m_propMgr.declareProperty("UsePIDTof2", m_useTof2);
-    m_propMgr.declareProperty("UsePIDTofE", m_useTofE);
-    m_propMgr.declareProperty("UsePIDTofQ", m_useTofQ);
-    m_propMgr.declareProperty("UsePIDEmc", m_useEmc);
-    m_propMgr.declareProperty("UsePIDMuc", m_useMuc);
-    m_propMgr.declareProperty("UsePIDTof", m_useTof);
-    m_propMgr.declareProperty("UsePIDTofC", m_useTofC);
-    m_propMgr.declareProperty("UsePIDTofCorr", m_useTofCorr);
+    m_propMgr.declareProperty("UsePIDDedx", m_useDedx = true);
+    m_propMgr.declareProperty("UsePIDTof1", m_useTof1 = true);
+    m_propMgr.declareProperty("UsePIDTof2", m_useTof2 = true);
+    m_propMgr.declareProperty("UsePIDTofE", m_useTofE = false);
+    m_propMgr.declareProperty("UsePIDTofQ", m_useTofQ = false);
+    m_propMgr.declareProperty("UsePIDEmc", m_useEmc = false);
+    m_propMgr.declareProperty("UsePIDMuc", m_useMuc = false);
+    m_propMgr.declareProperty("UsePIDTof", m_useTof = true);
+    m_propMgr.declareProperty("UsePIDTofC", m_useTofC = false);
+    m_propMgr.declareProperty("UsePIDTofCorr", m_useTofCorr = false);
 
-    m_propMgr.declareProperty("UsePIDProbability", m_usePIDProb);
-    m_propMgr.declareProperty("MinPIDProb", m_minPIDProb);
-    m_propMgr.declareProperty("RejectKaon", m_rejectKaon);
-    m_propMgr.declareProperty("RejectProton", m_rejectProton);
+    m_propMgr.declareProperty("UsePIDProbability", m_usePIDProb = true);
+    m_propMgr.declareProperty("MinPIDProb", m_minPIDProb = false);
+    m_propMgr.declareProperty("RejectKaon", m_rejectKaon = true);
+    m_propMgr.declareProperty("RejectProton", m_rejectProton = true);
 
-    m_propMgr.declareProperty("UsePIDLikelihood", m_useLikelihood);
-    m_propMgr.declareProperty("UsePIDNeuronNetwork", m_useNeuronNetwork);
+    m_propMgr.declareProperty("UsePIDLikelihood", m_useLikelihood = false);
+    m_propMgr.declareProperty("UsePIDNeuronNetwork",
+                              m_useNeuronNetwork = false);
 
     // C++98 way of initializing a vector.
     m_neuronNetworkValCut.clear();
@@ -111,8 +88,7 @@ BesStdSelector::Pion::Pion(const std::string& JvcName, const double& VrCut,
     jobSvc->setMyProperties(JvcName, &m_propMgr);
 }
 
-bool BesStdSelector::Pion::operator()(CDChargedPion& aPion)
-{
+bool BesStdSelector::Pion::operator()(CDChargedPion& aPion) {
     aPion.setUserTag(1);
 
     // WRONG: // mag = (P4.E)^2 - (P4.P3)^2, rho() = sign(mag) * sqrt(fabs(mag))
@@ -153,7 +129,7 @@ bool BesStdSelector::Pion::operator()(CDChargedPion& aPion)
         // xorigin.setZ(dbv[2]);
     }
 
-    HepVector a     = mdcKalTrk->getZHelix();
+    HepVector a = mdcKalTrk->getZHelix();
     HepSymMatrix Ea = mdcKalTrk->getZError();
     HepPoint3D point0(0., 0., 0.);
     HepPoint3D IP(xorigin[0], xorigin[1], xorigin[2]);
@@ -169,11 +145,6 @@ bool BesStdSelector::Pion::operator()(CDChargedPion& aPion)
 
     double costheta = cos(mdcKalTrk->theta());
     if (fabs(costheta) >= m_CosThetaCut) return false;
-
-    if (m_useSimplePID) {
-        // not implement yet, need another package
-        // ${BesArea}/Utilities/SimplePIDSvc
-    }
 
     if (m_usePID) {
         ParticleID* pid = ParticleID::instance();
@@ -210,28 +181,40 @@ bool BesStdSelector::Pion::operator()(CDChargedPion& aPion)
             pid->calculate();
             pPion = pid->probPion();
             pKaon = pid->probKaon();
-            if (!(pPion > m_minPIDProb && pPion > pKaon))
-                aPion.setUserTag(2 * charge);
+            if (!(pPion > m_minPIDProb && pPion > pKaon)) {
+                return false;
+            }
         } else if (m_rejectKaon && m_rejectProton) {
             pid->identify(pid->onlyPionKaonProton());
             pid->calculate();
-            pPion   = pid->probPion();
-            pKaon   = pid->probKaon();
+            pPion = pid->probPion();
+            pKaon = pid->probKaon();
             pProton = pid->probProton();
-            if (!(pPion > m_minPIDProb && pPion > pKaon && pPion > pProton))
-                aPion.setUserTag(2 * charge);
+            if (!(pPion > m_minPIDProb && pPion > pKaon && pPion > pProton)) {
+                return false;
+            }
         } else {
             std::cout << "*** WARNING: Solo PID! ***" << std::endl;
             pid->identify(pid->onlyPion());
             pid->calculate();
             pPion = pid->probPion();
-            if (pPion < m_minPIDProb) aPion.setUserTag(2 * charge);
+            if (pPion < m_minPIDProb) {
+                return false;
+            }
         }
 
-        if (m_pidtype == 0) { // user switch
+        if (m_pidtype == 0) {  // user switch
             return true;
         } else {
             if (aPion.userTag() != 1) return false;
+        }
+    } else if (m_useSimplePID) {
+        ISimplePIDSvc* m_simplePIDSvc;
+        Gaudi::svcLocator()->service("SimplePIDSvc", m_simplePIDSvc);
+
+        m_simplePIDSvc->preparePID(recTrk);
+        if (!m_simplePIDSvc->ispion()) {
+            return false;
         }
     }
 
@@ -243,8 +226,7 @@ bool BesStdSelector::Pion::operator()(CDChargedPion& aPion)
 //     m_DoPID = dopid;
 // }
 
-BesStdSelector::Pion omegaXiKSelectorPionPrimary("OmegaXiKSelectorPionPrimary");
-BesStdSelector::Pion omegaXiKSelectorPionAll("OmegaXiKSelectorPionAll", 10.0,
-                                          20.0);
+BesStdSelector::Pion primaryPionSelector("PrimaryPionSelector");
+BesStdSelector::Pion secondaryPionSelector("SecondaryPionSelector", 10.0, 20.0);
 /* ===================================================================<<< */
 /* ========================= Pion.cpp ends here ========================= */

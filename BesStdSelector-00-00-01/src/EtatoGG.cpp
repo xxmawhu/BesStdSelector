@@ -31,7 +31,7 @@
 #include "GaudiKernel/ISvcLocator.h"
 #include "GaudiKernel/PropertyMgr.h"
 
-#include "BesStdSelector/EtatoGG.hpp"
+#include "BesStdSelector/EtatoGG.h"
 
 BesStdSelector::EtatoGG::EtatoGG() {
     IJobOptionsSvc* jobSvc;
@@ -39,11 +39,11 @@ BesStdSelector::EtatoGG::EtatoGG() {
 
     PropertyMgr m_propMgr;
 
-    m_propMgr.declareProperty("MinMass", m_minMass=0.40);
-    m_propMgr.declareProperty("MaxMass", m_maxMass=0.70);
-    m_propMgr.declareProperty("MaxChisq", m_maxChisq=200);
+    m_propMgr.declareProperty("MinMass", m_minMass = 0.40);
+    m_propMgr.declareProperty("MaxMass", m_maxMass = 0.70);
+    m_propMgr.declareProperty("MaxChisq", m_maxChisq = 200);
 
-    jobSvc->setMyProperties("OmegaXiKSelectorEtatoGG", &m_propMgr);
+    jobSvc->setMyProperties("EtatoGGSelector", &m_propMgr);
 }
 
 bool BesStdSelector::EtatoGG::operator()(CDEta& aEta) {
@@ -51,13 +51,13 @@ bool BesStdSelector::EtatoGG::operator()(CDEta& aEta) {
 
     double mass = eta->unconMass();
     double chi2 = eta->chisq();
-    if ((mass > m_minMass) && (mass < m_maxMass) && (chi2 < m_maxChisq)){
+    if ((mass > m_minMass) && (mass < m_maxMass) && (chi2 < m_maxChisq)) {
         return false;
     }
 
     return true;
 }
 
-BesStdSelector::EtatoGG omegaXiKSelectorEtatoGG;
+BesStdSelector::EtatoGG etatoGGSelector;
 /* ===================================================================<<< */
 /* ======================== EtatoGG.cpp ends here ======================= */

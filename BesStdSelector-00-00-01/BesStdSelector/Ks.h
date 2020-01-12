@@ -27,12 +27,11 @@
 #ifndef BesStdSelector_KS_HPP
 #define BesStdSelector_KS_HPP
 
-#include "BesStdSelector/Namespace.hpp"
-// #include "BesDChain/CDKs.h"
-// #include "DecayChain/Function/DCSelectionFunction.h"
-#include "BesStdSelector/selector/DCSFBase.hpp"
+#include "BesDChain/CDKs.h"
+#include "DecayChain/Function/DCSelectionFunction.h"
+#include "BesStdSelector/BesStdSelector.h"
 
-class BesStdSelector::Ks : public DCSFKs {
+class BesStdSelector::Ks : public DCSelectionFunction<CDKs> {
    public:
     Ks();
 
@@ -50,8 +49,6 @@ class BesStdSelector::Ks : public DCSFKs {
     double m_maxVFitChisq;
     double m_minFlightSig;
 };
-
-extern BesStdSelector::Ks omegaXiKSelectorKs;
 
 #endif /* BesStdSelector_KS_HPP */
 /* ===================================================================<<< */

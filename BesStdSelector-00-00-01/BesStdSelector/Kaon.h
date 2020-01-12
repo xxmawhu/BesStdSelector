@@ -27,28 +27,27 @@
 #ifndef BesStdSelector_KAON_HPP
 #define BesStdSelector_KAON_HPP
 
-#include "BesStdSelector/Namespace.hpp"
-// #include "BesDChain/CDChargedKaon.h"
-// #include "DecayChain/Function/DCSelectionFunction.h"
-#include "BesStdSelector/selector/DCSFBase.hpp"
+#include "BesStdSelector/BesStdSelector.h"
+#include "BesDChain/CDChargedKaon.h"
+#include "DecayChain/Function/DCSelectionFunction.h"
 
-class BesStdSelector::Kaon : public DCSFKaon {
+class BesStdSelector::Kaon : public DCSelectionFunction<CDChargedKaon> {
    public:
-    Kaon(const std::string& JvcName = "OmegaXiKSelectorKaon",
-         const double& VrCut = 1.0, const double& VzCut = 10.0);
+    Kaon(const std::string& JvcName = "KaonSelector", const double& VrCut = 1.0,
+         const double& VzCut = 10.0);
 
     bool operator()(CDChargedKaon& aKaon);
 
     // RecMdcKalTrack::setPidType(RecMdcKalTrack::kaon);
     // class RecMdcKalTrack : public DstMdcKalTrack {};
     // DstMdcKalTrack::kaon = 3;
-    void setPIDType(int type) { m_pidtype = type; }
+    // void setPIDType(int type) { m_pidtype = type; }
 
    private:
     Kaon(const Kaon&);
     const Kaon& operator=(const Kaon&);
 
-    int m_pidtype;
+    // int m_pidtype;
 
     bool m_useMag;
     double m_minMag;
@@ -80,9 +79,6 @@ class BesStdSelector::Kaon : public DCSFKaon {
     bool m_useNeuronNetwork;
     std::vector<double> m_neuronNetworkValCut;
 };
-
-extern BesStdSelector::Kaon omegaXiKSelectorKaonPrimary;
-extern BesStdSelector::Kaon omegaXiKSelectorKaonAll;
 
 #endif /* BesStdSelector_KAON_HPP */
 /* ===================================================================<<< */

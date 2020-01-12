@@ -27,13 +27,13 @@
 #ifndef BesStdSelector_ELECTRON_HPP
 #define BesStdSelector_ELECTRON_HPP
 
-#include "BesStdSelector/Namespace.hpp"
 #include "BesDChain/CDElectron.h"
 #include "DecayChain/Function/DCSelectionFunction.h"
+#include "BesStdSelector/BesStdSelector.h"
 #include <string>
 class BesStdSelector::Electron : public DCSelectionFunction<CDElectron> {
    public:
-    Electron(const string& name="ElectronSelector");
+    Electron(const string& name = "ElectronSelector");
 
     // never require on the charge of a decay candidate!!!
     // inline void setCharge(int chr) { m_charge = chr; }

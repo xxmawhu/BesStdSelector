@@ -27,12 +27,11 @@
 #ifndef BesStdSelector_ETATOGG_HPP
 #define BesStdSelector_ETATOGG_HPP
 
-#include "BesStdSelector/Namespace.hpp"
-// #include "BesDChain/CDEta.h"
-// #include "DecayChain/Function/DCSelectionFunction.h"
-#include "BesStdSelector/selector/DCSFBase.hpp"
+#include "BesDChain/CDEta.h"
+#include "DecayChain/Function/DCSelectionFunction.h"
+#include "BesStdSelector/BesStdSelector.h"
 
-class BesStdSelector::EtatoGG : public DCSFEta {
+class BesStdSelector::EtatoGG : public DCSelectionFunction<CDEta> {
    public:
     EtatoGG();
 
@@ -46,8 +45,6 @@ class BesStdSelector::EtatoGG : public DCSFEta {
     double m_maxMass;
     double m_maxChisq;
 };
-
-extern BesStdSelector::EtatoGG omegaXiKSelectorEtatoGG;
 
 #endif /* BesStdSelector_ETATOGG_HPP */
 /* ===================================================================<<< */

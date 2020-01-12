@@ -47,9 +47,9 @@ BesStdSelector::GoodChrTrk::GoodChrTrk() {
 
     PropertyMgr m_propMgr;
 
-    m_propMgr.declareProperty("RxyCut", m_VrCut=1.0);
-    m_propMgr.declareProperty("Vz0Cut", m_VzCut=10.0);
-    m_propMgr.declareProperty("CosThetaCut", m_CosThetaCut=0.93);
+    m_propMgr.declareProperty("RxyCut", m_VrCut = 1.0);
+    m_propMgr.declareProperty("Vz0Cut", m_VzCut = 10.0);
+    m_propMgr.declareProperty("CosThetaCut", m_CosThetaCut = 0.93);
 
     jobSvc->setMyProperties("PrimaryGoodChrTrkSelector", &m_propMgr);
 }
@@ -79,7 +79,7 @@ bool BesStdSelector::GoodChrTrk::operator()(CDChargedPion& aGoodChrTrk) {
     double dr = fabs(vecipa[0]);
     double dz = fabs(vecipa[3]);
     double costheta = cos(mdcKalTrk->theta());
-    if (dr > m_VrCut || dz > m_VzCut || fabs(costheta) > m_CosThetaCut){
+    if (dr > m_VrCut || dz > m_VzCut || fabs(costheta) > m_CosThetaCut) {
         return false;
     }
 

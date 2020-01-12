@@ -27,12 +27,11 @@
 #ifndef OMEGAXIK_SELECTOR_PI0_HPP
 #define OMEGAXIK_SELECTOR_PI0_HPP
 
-#include "OmegaXiKAlg/Namespace.hpp"
-// #include "BesDChain/CDPi0.h"
-// #include "DecayChain/Function/DCSelectionFunction.h"
-#include "OmegaXiKAlg/selector/DCSFBase.hpp"
+#include "BesDChain/CDPi0.h"
+#include "DecayChain/Function/DCSelectionFunction.h"
+#include "BesStdSelector/BesStdSelector.h"
 
-class BesStdSelector::Pi0 : public DCSFPi0 {
+class BesStdSelector::Pi0 : public DCSelectionFunction<CDPi0> {
    public:
     Pi0();
 
@@ -46,10 +45,9 @@ class BesStdSelector::Pi0 : public DCSFPi0 {
     double m_maxMass;
     double m_maxChisq;
 
+    bool m_CutOnMag;
     double m_minRho;
 };
-
-extern BesStdSelector::Pi0 omegaXiKSelectorPi0;
 
 #endif /* OMEGAXIK_SELECTOR_PI0_HPP */
 /* ===================================================================<<< */

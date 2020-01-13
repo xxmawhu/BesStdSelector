@@ -76,6 +76,6 @@ bool BesStdSelector::Ks::operator()(CDKs& aKs) {
     return true;
 }
 
-BesStdSelector::Ks ksSelector;
+BesStdSelector::Ks BesStdSelector::ksSelector;
 /* ===================================================================<<< */
 /* ========================== Ks.cpp ends here ========================== */

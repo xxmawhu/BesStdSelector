@@ -42,6 +42,7 @@
 #include "BesStdSelector/Proton.h"
 #include "BesStdSelector/BesStdSelector.h"
 
+using BesStdSelector::Proton;
 Proton::Proton(const std::string& JvcName, const double& VrCut,
                                const double& VzCut) {
     IJobOptionsSvc* jobSvc;
@@ -89,8 +90,6 @@ Proton::Proton(const std::string& JvcName, const double& VrCut,
 }
 
 bool Proton::operator()(CDProton& aProton) {
-    aProton.setUserTag(1);
-
     // WRONG: // mag = (P4.E)^2 - (P4.P3)^2, rho() = sign(mag) * sqrt(fabs(mag))
     // WRONG: // m_minMag is 0, then P4.rho() < 0, virtual particles!
     // WRONG: // m_minMag is small, then this is equally a min-mass-cut.
@@ -105,7 +104,9 @@ bool Proton::operator()(CDProton& aProton) {
 
     // MDC track selection
     RecMdcKalTrack::setPidType(RecMdcKalTrack::proton);
-    if (!recTrk->isMdcKalTrackValid()) return false;
+    if (!recTrk->isMdcKalTrackValid()){
+        return false;
+    }
 
     RecMdcKalTrack* mdcKalTrk = recTrk->mdcKalTrack();
     if (mdcKalTrk->charge() == 0) return false;
@@ -121,8 +122,8 @@ bool Proton::operator()(CDProton& aProton) {
         // xorigin.setZ(dbv[2]);
     }
 
-    HepVector a = mdcKalTrk->getZHelix();
-    HepSymMatrix Ea = mdcKalTrk->getZError();
+    HepVector a = mdcKalTrk->getZHelixP();
+    HepSymMatrix Ea = mdcKalTrk->getZErrorP();
     HepPoint3D point0(0., 0., 0.);
     HepPoint3D IP(xorigin[0], xorigin[1], xorigin[2]);
     VFHelix helixip3(point0, a, Ea);
@@ -130,13 +131,19 @@ bool Proton::operator()(CDProton& aProton) {
     HepVector vecipa = helixip3.a();
 
     double dr = fabs(vecipa[0]);
-    if (dr >= m_VrCut) return false;
+    if (dr >= m_VrCut){
+        return false;
+    }
 
     double dz = fabs(vecipa[3]);
-    if (dz >= m_VzCut) return false;
+    if (dz >= m_VzCut){
+        return false;
+    }
 
     double costheta = cos(mdcKalTrk->theta());
-    if (fabs(costheta) >= m_CosThetaCut) return false;
+    if (fabs(costheta) >= m_CosThetaCut){
+        return false;
+    }
 
     if (m_usePID) {
         ParticleID* pid = ParticleID::instance();
@@ -175,7 +182,7 @@ bool Proton::operator()(CDProton& aProton) {
             pProton = pid->probProton();
             pPion = pid->probPion();
             pKaon = pid->probKaon();
-            if (pProton < m_minPIDProb || pProton > pPion || pProton > pKaon) {
+            if (pProton < m_minPIDProb || pProton < pPion || pProton < pKaon) {
                 return false;
             }
 
@@ -191,7 +198,6 @@ bool Proton::operator()(CDProton& aProton) {
                 return false;
             }
         } else {
-            std::cout << "*** WARNING: Solo PID! ***" << std::endl;
             pid->identify(pid->onlyProton());
             pid->calculate();
             pProton = pid->probProton();
@@ -204,8 +210,8 @@ bool Proton::operator()(CDProton& aProton) {
     return true;
 }
 
-Proton primaryProtonSelector("PrimaryProtonSelector");
-Proton secondaryProtonSelector("SecondaryProtonSelector", 10.0,
+Proton BesStdSelector::primaryProtonSelector("PrimaryProtonSelector");
+Proton BesStdSelector::secondaryProtonSelector("SecondaryProtonSelector", 10.0,
                                                20.0);
 /* ===================================================================<<< */
 /* ======================== Proton.cpp ends here ======================== */

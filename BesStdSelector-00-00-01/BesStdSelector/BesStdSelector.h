@@ -9,14 +9,14 @@
 #   Describe      :
 #
 # ====================================================*/
-// #ifndef _BESSTDSELECTOR_H
-// #define _BESSTDSELECTOR_H
+#ifndef _BESSTDSELECTOR_H
+#define _BESSTDSELECTOR_H
 namespace BesStdSelector {
 class GoodChrTrk;
 class Photon;
 class Electron;
 class Kaon;
-// class Proton;
+class Proton;
 class Pion;
 
 class Lambda;
@@ -29,10 +29,11 @@ class EtaP;
 
 class Sigma0;
 class CombinateParticle;
-/*
-extern GoodChrTrk primaryGoodChrTrkSelector;
+
+extern GoodChrTrk GoodChrTrkSelector;
 extern Photon soloPhotonSelector;
-// extern Proton primaryProtonSelector;
+extern Proton primaryProtonSelector;
+extern Proton secondaryProtonSelector;
 extern Kaon primaryKaonSelector;
 extern Kaon secondaryKaonSelector;
 extern Pion primaryPionSelector;
@@ -48,12 +49,11 @@ extern CombinateParticle phiSelector;
 extern CombinateParticle Xi0Selector;
 extern CombinateParticle XipSelector;
 extern CombinateParticle Sigma0Selector;
-extern CombinateParticle SimgapSelector;
+extern CombinateParticle SigmapSelector;
 extern CombinateParticle OmegaSelector;
 
 extern CombinateParticle etatoPiPiPi0Selector;
 extern CombinateParticle EtaPtoPiPiEtaSelector;
 extern CombinateParticle EtaPtoPiPiGSelector;
-*/
 }
-// #endif  // _BESSTDSELECTOR_H
+#endif  // _BESSTDSELECTOR_H

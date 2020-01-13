@@ -81,6 +81,6 @@ bool BesStdSelector::Lambda::operator()(CDDecay& aLambda) {
 
     return true;
 }
-BesStdSelector::Lambda lambdaSelector;
+BesStdSelector::Lambda BesStdSelector::lambdaSelector;
 /* ===================================================================<<< */
 /* ======================== Lambda.cpp ends here ======================== */

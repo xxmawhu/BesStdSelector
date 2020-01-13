@@ -58,6 +58,6 @@ bool BesStdSelector::EtatoGG::operator()(CDEta& aEta) {
     return true;
 }
 
-BesStdSelector::EtatoGG etatoGGSelector;
+BesStdSelector::EtatoGG BesStdSelector::etatoGGSelector;
 /* ===================================================================<<< */
 /* ======================== EtatoGG.cpp ends here ======================= */

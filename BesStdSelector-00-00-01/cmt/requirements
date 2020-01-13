@@ -27,6 +27,5 @@ library BesStdSelector *.cpp
 apply_pattern package_linkopts
 apply_pattern package_stamps
 apply_pattern ld_library_path
-
 apply_pattern package_shlibflags
 

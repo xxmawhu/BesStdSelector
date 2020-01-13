@@ -28,8 +28,9 @@
 #define BesStdSelector_PROTON_HPP
 #include <string>
 #include "DecayChain/Function/DCSelectionFunction.h"
-//#include "BesStdSelector/BesStdSelector.h"
 #include "BesDChain/CDProton.h"
+#include "BesStdSelector/BesStdSelector.h"
+using BesStdSelector::Proton;
 
 class Proton : public DCSelectionFunction<CDProton> {
    public:
@@ -83,8 +84,6 @@ class Proton : public DCSelectionFunction<CDProton> {
     bool m_useNeuronNetwork;
     std::vector<double> m_neuronNetworkValCut;
 };
-extern Proton primaryProtonSelector;
-extern Proton secondaryProtonSelector;
 #endif /* BesStdSelector_PROTON_HPP */
 /* ===================================================================<<< */
 /* ======================== Proton.hpp ends here ======================== */

@@ -35,8 +35,8 @@
 #include "GaudiKernel/ISvcLocator.h"
 #include "GaudiKernel/PropertyMgr.h"
 
+#include "BesStdSelector/BesStdSelector.h"
 #include "BesStdSelector/CombinateParticle.h"
-
 BesStdSelector::CombinateParticle::CombinateParticle(
     const string& selector_name, const double& minMass, const double& maxMass) {
     IJobOptionsSvc* jobSvc;
@@ -58,17 +58,17 @@ bool BesStdSelector::CombinateParticle::operator()(CDDecay& aComb) {
     return true;
 }
 
-BesStdSelector::CombinateParticle EtaPtoPiPiEtaSelector(
+BesStdSelector::CombinateParticle BesStdSelector::EtaPtoPiPiEtaSelector(
     "EtaPtoPiPiEtaSelector");
-BesStdSelector::CombinateParticle EtaPtoPiPiGSelector("EtaPtoPiPiGSelector");
-BesStdSelector::CombinateParticle etatoPiPiPi0Selector("EtatoPiPiPi0Selector");
-BesStdSelector::CombinateParticle omegaSelector("omegaSelector");
-BesStdSelector::CombinateParticle phiSelector("phiSelector");
-BesStdSelector::CombinateParticle Sigma0Selector("Sigma0Selector");
-BesStdSelector::CombinateParticle Xi0Selector("Xi0Selector");
-BesStdSelector::CombinateParticle XipSelector("XipSelector");
-BesStdSelector::CombinateParticle SigmapSelector("SigmapSelector");
-BesStdSelector::CombinateParticle OmegaSelector("OmegaSelector");
+BesStdSelector::CombinateParticle BesStdSelector::EtaPtoPiPiGSelector("EtaPtoPiPiGSelector");
+BesStdSelector::CombinateParticle BesStdSelector::etatoPiPiPi0Selector("EtatoPiPiPi0Selector");
+BesStdSelector::CombinateParticle BesStdSelector::omegaSelector("omegaSelector");
+BesStdSelector::CombinateParticle BesStdSelector::phiSelector("phiSelector");
+BesStdSelector::CombinateParticle BesStdSelector::Sigma0Selector("Sigma0Selector");
+BesStdSelector::CombinateParticle BesStdSelector::Xi0Selector("Xi0Selector");
+BesStdSelector::CombinateParticle BesStdSelector::XipSelector("XipSelector");
+BesStdSelector::CombinateParticle BesStdSelector::SigmapSelector("SigmapSelector");
+BesStdSelector::CombinateParticle BesStdSelector::OmegaSelector("OmegaSelector");
 /* ===================================================================<<< */
 /* ========================= CombinateParticle.cpp ends here
  * ========================= */

@@ -86,6 +86,6 @@ bool BesStdSelector::GoodChrTrk::operator()(CDChargedPion& aGoodChrTrk) {
     return true;
 }
 
-BesStdSelector::GoodChrTrk omegaXiKSelectorGoodChrTrk;
+BesStdSelector::GoodChrTrk BesStdSelector::GoodChrTrkSelector;
 /* ===================================================================<<< */
 /* ===================== GoodChrTrk.cpp ends here ======================= */

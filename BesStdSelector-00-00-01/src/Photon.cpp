@@ -230,6 +230,6 @@ bool BesStdSelector::Photon::FromPi0(
     return false;
 }
 
-BesStdSelector::Photon soloPhotonSelector;
+BesStdSelector::Photon BesStdSelector::soloPhotonSelector;
 /* ===================================================================<<< */
 /* ======================== Photon.cpp ends here ======================== */

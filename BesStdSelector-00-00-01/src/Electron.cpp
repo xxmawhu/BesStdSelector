@@ -165,7 +165,7 @@ bool BesStdSelector::Electron::operator()(CDElectron& aElectron) {
     return true;
 }
 
-BesStdSelector::Electron primaryElectronSelector("PrimaryElectronSelector");
-BesStdSelector::Electron secondaryElectronSelector("SecondaryElectronSelector");
+BesStdSelector::Electron BesStdSelector::primaryElectronSelector("PrimaryElectronSelector");
+BesStdSelector::Electron BesStdSelector::secondaryElectronSelector("SecondaryElectronSelector");
 /* ===================================================================<<< */
 /* ====================== Electron.cpp ends here ======================== */

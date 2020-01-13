@@ -80,6 +80,6 @@ bool BesStdSelector::Pi0::operator()(CDPi0& aPi0) {
     return true;
 }
 
-BesStdSelector::Pi0 pi0Selector;
+BesStdSelector::Pi0 BesStdSelector::pi0Selector;
 /* ===================================================================<<< */
 /* ========================= Pi0.cpp ends here ========================== */

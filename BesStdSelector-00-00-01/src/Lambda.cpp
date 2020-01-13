@@ -58,8 +58,8 @@ BesStdSelector::Lambda::Lambda() {
 
 bool BesStdSelector::Lambda::operator()(CDDecay& aLambda) {
     // Need the package HadronInfo
-    LamInfo lamInfo(aLambda);
-    lamInfo.calculate();
+    LamInfo lamInfo(aLambda.decay());
+    // lamInfo.calculate();
 
     double mass = lamInfo.m();
     if ((mass <= m_minMass) || (mass >= m_maxMass)) return false;

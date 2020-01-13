@@ -26,16 +26,18 @@
  * ============================== CODES ==============================>>> */
 #ifndef BesStdSelector_PROTON_HPP
 #define BesStdSelector_PROTON_HPP
-
-#include "BesStdSelector/BesStdSelector.h"
-#include "BesDChain/CDProton.h"
-#include "DecayChain/Function/DCSelectionFunction.h"
 #include <string>
+#include "DecayChain/Function/DCSelectionFunction.h"
+//#include "BesStdSelector/BesStdSelector.h"
+#include "BesDChain/CDProton.h"
 
-class BesStdSelector::Proton : public DCSelectionFunction<CDProton> {
+class Proton : public DCSelectionFunction<CDProton> {
    public:
     Proton(const std::string& JvcName = "primaryProtonSelector",
            const double& VrCut = 1.0, const double& VzCut = 10.0);
+    string getName(){
+        return "test";
+    }
 
     bool operator()(CDProton& aProton);
 
@@ -81,7 +83,8 @@ class BesStdSelector::Proton : public DCSelectionFunction<CDProton> {
     bool m_useNeuronNetwork;
     std::vector<double> m_neuronNetworkValCut;
 };
-
+extern Proton primaryProtonSelector;
+extern Proton secondaryProtonSelector;
 #endif /* BesStdSelector_PROTON_HPP */
 /* ===================================================================<<< */
 /* ======================== Proton.hpp ends here ======================== */

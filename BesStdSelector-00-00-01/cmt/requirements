@@ -1,5 +1,4 @@
 package BesStdSelector
-
 author Xinxin Ma <maxx@ihep.ac.cn>
 
 use BesPolicy        BesPolicy-*
@@ -17,8 +16,17 @@ use VertexFit           VertexFit-*             Analysis
 # use McDecayModeSvc      McDecayModeSvc-*        Utilities
 use GammaConv           GammaConv-*             Utilities
 # use MCTruthMatchSvc     MCTruthMatchSvc-*       Utilities
-use HadronInfo          HadronInfo-*            Utilities
+use HadronInfo  HadronInfo-*  Utilities
 # use DataBaseReader      DataBaseReader-*        Utilities
 
-apply_pattern component_library 
-library BesStdSelector *.cpp 
+apply_pattern installed_linkopts
+
+# macro_append GammaConv_cppflags "-w"
+library BesStdSelector *.cpp
+
+apply_pattern package_linkopts
+apply_pattern package_stamps
+apply_pattern ld_library_path
+
+apply_pattern package_shlibflags
+

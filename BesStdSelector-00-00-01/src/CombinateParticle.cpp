@@ -63,6 +63,7 @@ BesStdSelector::CombinateParticle EtaPtoPiPiEtaSelector(
 BesStdSelector::CombinateParticle EtaPtoPiPiGSelector("EtaPtoPiPiGSelector");
 BesStdSelector::CombinateParticle etatoPiPiPi0Selector("EtatoPiPiPi0Selector");
 BesStdSelector::CombinateParticle omegaSelector("omegaSelector");
+BesStdSelector::CombinateParticle phiSelector("phiSelector");
 BesStdSelector::CombinateParticle Sigma0Selector("Sigma0Selector");
 BesStdSelector::CombinateParticle Xi0Selector("Xi0Selector");
 BesStdSelector::CombinateParticle XipSelector("XipSelector");

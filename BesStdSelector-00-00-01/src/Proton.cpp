@@ -40,8 +40,9 @@
 #include "VertexFit/VertexFit.h"
 
 #include "BesStdSelector/Proton.h"
+#include "BesStdSelector/BesStdSelector.h"
 
-BesStdSelector::Proton::Proton(const std::string& JvcName, const double& VrCut,
+Proton::Proton(const std::string& JvcName, const double& VrCut,
                                const double& VzCut) {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
@@ -87,7 +88,7 @@ BesStdSelector::Proton::Proton(const std::string& JvcName, const double& VrCut,
     jobSvc->setMyProperties(JvcName, &m_propMgr);
 }
 
-bool BesStdSelector::Proton::operator()(CDProton& aProton) {
+bool Proton::operator()(CDProton& aProton) {
     aProton.setUserTag(1);
 
     // WRONG: // mag = (P4.E)^2 - (P4.P3)^2, rho() = sign(mag) * sqrt(fabs(mag))
@@ -203,9 +204,8 @@ bool BesStdSelector::Proton::operator()(CDProton& aProton) {
     return true;
 }
 
-BesStdSelector::Proton primaryProtonSelector("PrimaryProtonSelector", 1.0,
-                                             10.0);
-BesStdSelector::Proton secondaryProtonSelector("SecondaryProtonSelector", 10.0,
+Proton primaryProtonSelector("PrimaryProtonSelector");
+Proton secondaryProtonSelector("SecondaryProtonSelector", 10.0,
                                                20.0);
 /* ===================================================================<<< */
 /* ======================== Proton.cpp ends here ======================== */

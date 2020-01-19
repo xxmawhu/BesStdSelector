@@ -36,9 +36,7 @@ class Proton : public DCSelectionFunction<CDProton> {
    public:
     Proton(const std::string& JvcName = "primaryProtonSelector",
            const double& VrCut = 1.0, const double& VzCut = 10.0);
-    string getName(){
-        return "test";
-    }
+    string getName() { return "test"; }
 
     bool operator()(CDProton& aProton);
 

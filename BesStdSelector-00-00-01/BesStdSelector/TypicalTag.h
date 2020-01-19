@@ -1,5 +1,5 @@
 /* <===<===<===<===<===<===<===<===<===~===>===>===>===>===>===>===>===>===>
- * File Name:    Ks.hpp
+ * File Name:    TypicalTag.hpp
  * Author:       Xin-Xin MA, Hao-Kai SUN
  * Created:      2019-09-07 Sat 12:51:35 CST
  * <<=====================================>>
@@ -24,32 +24,41 @@
  * along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ============================== CODES ==============================>>> */
-#ifndef BesStdSelector_KS_HPP
-#define BesStdSelector_KS_HPP
+#ifndef BesStdSelector_TypicalTag_HPP
+#define BesStdSelector_TypicalTag_HPP
 
-#include "BesDChain/CDKs.h"
+#include "BesDChain/CDDecay.h"
 #include "DecayChain/Function/DCSelectionFunction.h"
 #include "BesStdSelector/BesStdSelector.h"
+#include <string>
 
-class BesStdSelector::Ks : public DCSelectionFunction<CDKs> {
+class BesStdSelector::TypicalTag : public DCSelectionFunction<CDDecay> {
    public:
-    Ks();
+    TypicalTag(const std::string&);
 
-    bool operator()(CDKs& aKs);
+    bool operator()(CDDecay& aTypicalTag);
+    void setEcm(const double& Ecm) { m_Ecm = Ecm; }
 
    private:
-    Ks(const Ks&);
-    const Ks& operator=(const Ks&);
+    TypicalTag(const TypicalTag&);
+    const TypicalTag& operator=(const TypicalTag&);
 
+    bool m_cutMass;
     double m_minMass;
     double m_maxMass;
-    double m_maxChisq;
 
-    // bool m_use2ndVFit;
-    // double m_maxVFitChisq;
-    // double m_minFlightSig;
+    double m_Ecm;
+    bool m_cutMbc;
+    double m_minMbc, m_maxMbc;
+
+    bool m_cutRecMass;
+    double m_minRecMass, m_maxRecMass;
+
+    bool m_cutDeltaE;
+    double m_minDeltaE, m_maxDeltaE;
 };
 
-#endif /* BesStdSelector_KS_HPP */
+#endif /* BesStdSelector_TypicalTag_HPP */
 /* ===================================================================<<< */
-/* ========================== Ks.hpp ends here ========================== */
+/* ========================== TypicalTag.hpp ends here
+ * ========================== */

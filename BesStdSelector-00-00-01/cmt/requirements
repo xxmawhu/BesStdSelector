@@ -1,31 +1,25 @@
 package BesStdSelector
 author Xinxin Ma <maxx@ihep.ac.cn>
+author Haokain Sun <spin.hk@outlook.com>
 
 use BesPolicy        BesPolicy-*
 
 use GaudiInterface   GaudiInterface-*   External
 
-# use McTruth             McTruth-*               Event
-# use EventModel          EventModel-*            Event
 use BesDChain           BesDChain-*           Event
 use EvtRecEvent         EvtRecEvent-*           Event
 use ParticleID          ParticleID-*            Analysis
 use SimplePIDSvc SimplePIDSvc-* Utilities
 use VertexFit           VertexFit-*             Analysis
 
-# use McDecayModeSvc      McDecayModeSvc-*        Utilities
 use GammaConv           GammaConv-*             Utilities
-# use MCTruthMatchSvc     MCTruthMatchSvc-*       Utilities
 use HadronInfo  HadronInfo-*  Utilities
-# use DataBaseReader      DataBaseReader-*        Utilities
 
 apply_pattern installed_linkopts
 
 # macro_append GammaConv_cppflags "-w"
 library BesStdSelector *.cpp
-
 apply_pattern package_linkopts
 apply_pattern package_stamps
 apply_pattern ld_library_path
 apply_pattern package_shlibflags
-

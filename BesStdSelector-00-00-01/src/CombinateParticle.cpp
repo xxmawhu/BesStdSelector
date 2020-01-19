@@ -37,8 +37,11 @@
 
 #include "BesStdSelector/BesStdSelector.h"
 #include "BesStdSelector/CombinateParticle.h"
-BesStdSelector::CombinateParticle::CombinateParticle(
-    const string& selector_name, const double& minMass, const double& maxMass) {
+
+using BesStdSelector::CombinateParticle;
+CombinateParticle::CombinateParticle(const string& selector_name,
+                                     const double& minMass,
+                                     const double& maxMass) {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
 
@@ -50,7 +53,7 @@ BesStdSelector::CombinateParticle::CombinateParticle(
     jobSvc->setMyProperties(selector_name, &m_propMgr);
 }
 
-bool BesStdSelector::CombinateParticle::operator()(CDDecay& aComb) {
+bool CombinateParticle::operator()(CDDecay& aComb) {
     double mass = aComb.mass();
     if (mass < m_minMass || mass > m_maxMass) {
         return false;
@@ -58,17 +61,16 @@ bool BesStdSelector::CombinateParticle::operator()(CDDecay& aComb) {
     return true;
 }
 
-BesStdSelector::CombinateParticle BesStdSelector::EtaPtoPiPiEtaSelector(
-    "EtaPtoPiPiEtaSelector");
-BesStdSelector::CombinateParticle BesStdSelector::EtaPtoPiPiGSelector("EtaPtoPiPiGSelector");
-BesStdSelector::CombinateParticle BesStdSelector::etatoPiPiPi0Selector("EtatoPiPiPi0Selector");
-BesStdSelector::CombinateParticle BesStdSelector::omegaSelector("omegaSelector");
-BesStdSelector::CombinateParticle BesStdSelector::phiSelector("phiSelector");
-BesStdSelector::CombinateParticle BesStdSelector::Sigma0Selector("Sigma0Selector");
-BesStdSelector::CombinateParticle BesStdSelector::Xi0Selector("Xi0Selector");
-BesStdSelector::CombinateParticle BesStdSelector::XipSelector("XipSelector");
-BesStdSelector::CombinateParticle BesStdSelector::SigmapSelector("SigmapSelector");
-BesStdSelector::CombinateParticle BesStdSelector::OmegaSelector("OmegaSelector");
+CombinateParticle BesStdSelector::EtaPtoPiPiEtaSelector("EtaPtoPiPiEtaSelector");
+CombinateParticle BesStdSelector::EtaPtoPiPiGSelector("EtaPtoPiPiGSelector");
+CombinateParticle BesStdSelector::etatoPiPiPi0Selector("EtatoPiPiPi0Selector");
+CombinateParticle BesStdSelector::omegaSelector("omegaSelector");
+CombinateParticle BesStdSelector::phiSelector("phiSelector");
+CombinateParticle BesStdSelector::Sigma0Selector("Sigma0Selector");
+CombinateParticle BesStdSelector::Xi0Selector("Xi0Selector");
+CombinateParticle BesStdSelector::XipSelector("XipSelector");
+CombinateParticle BesStdSelector::SigmapSelector("SigmapSelector");
+CombinateParticle BesStdSelector::OmegaSelector("OmegaSelector");
 /* ===================================================================<<< */
 /* ========================= CombinateParticle.cpp ends here
  * ========================= */

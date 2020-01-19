@@ -213,6 +213,7 @@ bool BesStdSelector::Kaon::operator()(CDChargedKaon& aKaon) {
 }
 
 BesStdSelector::Kaon BesStdSelector::primaryKaonSelector("PrimaryKaonSelector");
-BesStdSelector::Kaon BesStdSelector::secondaryKaonSelector("SecondaryKaonSelector", 10.0, 20.0);
+BesStdSelector::Kaon BesStdSelector::secondaryKaonSelector(
+    "SecondaryKaonSelector", 10.0, 20.0);
 /* ===================================================================<<< */
 /* ========================= Kaon.cpp ends here ========================= */

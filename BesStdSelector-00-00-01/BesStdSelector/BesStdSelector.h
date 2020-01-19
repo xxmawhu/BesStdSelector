@@ -30,6 +30,8 @@ class EtaP;
 class Sigma0;
 class CombinateParticle;
 
+class TypicalTag;
+
 extern GoodChrTrk GoodChrTrkSelector;
 extern Photon soloPhotonSelector;
 extern Proton primaryProtonSelector;
@@ -55,5 +57,6 @@ extern CombinateParticle OmegaSelector;
 extern CombinateParticle etatoPiPiPi0Selector;
 extern CombinateParticle EtaPtoPiPiEtaSelector;
 extern CombinateParticle EtaPtoPiPiGSelector;
+extern TypicalTag typicalTagSelector;
 }
 #endif  // _BESSTDSELECTOR_H

@@ -44,8 +44,8 @@ BesStdSelector::Ks::Ks() {
 
     PropertyMgr m_propMgr;
 
-    m_propMgr.declareProperty("MinMass", m_minMass = 0.487);
-    m_propMgr.declareProperty("MaxMass", m_maxMass = 0.511);
+    m_propMgr.declareProperty("MinMass", m_minMass = 0.470);
+    m_propMgr.declareProperty("MaxMass", m_maxMass = 0.530);
     m_propMgr.declareProperty("MaxChisq", m_maxChisq = 200);
 
     // We strongly suggest you do not cut any second vertex fit informations

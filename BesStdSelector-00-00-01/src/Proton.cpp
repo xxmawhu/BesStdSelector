@@ -44,7 +44,7 @@
 
 using BesStdSelector::Proton;
 Proton::Proton(const std::string& JvcName, const double& VrCut,
-                               const double& VzCut) {
+               const double& VzCut) {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
 
@@ -104,7 +104,7 @@ bool Proton::operator()(CDProton& aProton) {
 
     // MDC track selection
     RecMdcKalTrack::setPidType(RecMdcKalTrack::proton);
-    if (!recTrk->isMdcKalTrackValid()){
+    if (!recTrk->isMdcKalTrackValid()) {
         return false;
     }
 
@@ -131,17 +131,17 @@ bool Proton::operator()(CDProton& aProton) {
     HepVector vecipa = helixip3.a();
 
     double dr = fabs(vecipa[0]);
-    if (dr >= m_VrCut){
+    if (dr >= m_VrCut) {
         return false;
     }
 
     double dz = fabs(vecipa[3]);
-    if (dz >= m_VzCut){
+    if (dz >= m_VzCut) {
         return false;
     }
 
     double costheta = cos(mdcKalTrk->theta());
-    if (fabs(costheta) >= m_CosThetaCut){
+    if (fabs(costheta) >= m_CosThetaCut) {
         return false;
     }
 

@@ -227,7 +227,7 @@ bool BesStdSelector::Pion::operator()(CDChargedPion& aPion) {
 // }
 
 BesStdSelector::Pion BesStdSelector::primaryPionSelector("PrimaryPionSelector");
-BesStdSelector::Pion BesStdSelector::secondaryPionSelector("SecondaryPionSelector", 
-        10.0, 20.0);
+BesStdSelector::Pion BesStdSelector::secondaryPionSelector(
+    "SecondaryPionSelector", 10.0, 20.0);
 /* ===================================================================<<< */
 /* ========================= Pion.cpp ends here ========================= */

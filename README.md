@@ -4,7 +4,10 @@
 Ihe package collects most selectors used in the BESIII physic analysis frame.
 What's more, the exactly conditions are obtained from the publications. So I
 call it as StdSelector.
+## Why choose the BesStdSelector
 
+* Prevent you from potentially mistake.
+* Life is short 
 ## What do the selectors select
 
 Select the chared tracks, select the showers, select the long lifetime

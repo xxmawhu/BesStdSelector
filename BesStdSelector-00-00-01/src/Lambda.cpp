@@ -32,7 +32,7 @@
 #include "EvtRecEvent/EvtRecVeeVertex.h"
 #include "ParticleID/ParticleID.h"
 
-#include "HadronInfo/LamInfo.h"
+#include "HadronInfo/LambdaInfo.h"
 
 #include "BesStdSelector/Lambda.h"
 
@@ -58,16 +58,16 @@ BesStdSelector::Lambda::Lambda() {
 
 bool BesStdSelector::Lambda::operator()(CDDecay& aLambda) {
     // Need the package HadronInfo
-    LamInfo lamInfo(aLambda.decay());
+    LambdaInfo lamInfo(aLambda.decay());
     // lamInfo.calculate();
 
-    double mass = lamInfo.m();
+    double mass = lamInfo.mass();
     if ((mass <= m_minMass) || (mass >= m_maxMass)) return false;
 
-    if (lamInfo.vtxChi2() > m_maxChisq) return false;
+    if (lamInfo.VertexFitChisq() > m_maxChisq) return false;
 
     if (m_use2ndVFit) {
-        if (lamInfo.chisq() > m_maxVFitChisq) return false;
+        if (lamInfo.SecondVertexFitChisq() > m_maxVFitChisq) return false;
     }
 
     if (m_useFlightSig) {

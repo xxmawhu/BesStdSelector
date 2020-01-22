@@ -42,3 +42,18 @@ SecondaryProtonSelector.MinPIDProb=0.001;
 SecondaryProtonSelector.RejectPionKaon=true;
 SecondaryProtonSelector.RejectElectron=false;
 
+// select the pion from IP
+PrimaryPionSelector.RxyCut = 1;
+PrimaryPionSelector.Vz0Cut = 10;
+PrimaryPionSelector.CosThetaCut = 0.93;
+PrimaryPionSelector.UsePID = true;
+PrimaryPionSelector.UseSimplePID = false;
+PrimaryPionSelector.MinPIDProb=0.001;
+
+// select pion from Lambda or Ks
+SecondaryPionSelector.RxyCut = 20;
+SecondaryPionSelector.Vz0Cut = 20;
+SecondaryPionSelector.CosThetaCut = 0.93;
+SecondaryPionSelector.UsePID = false;
+SecondaryPionSelector.UseSimplePID = false;
+SecondaryPionSelector.MinPIDProb=0.001;

@@ -71,7 +71,7 @@ BesStdSelector::Pion::Pion(const std::string& JvcName, const double& VrCut,
     m_propMgr.declareProperty("UsePIDTofCorr", m_useTofCorr = false);
 
     m_propMgr.declareProperty("UsePIDProbability", m_usePIDProb = true);
-    m_propMgr.declareProperty("MinPIDProb", m_minPIDProb = false);
+    m_propMgr.declareProperty("MinPIDProb", m_minPIDProb = 0.001);
     m_propMgr.declareProperty("RejectKaon", m_rejectKaon = true);
     m_propMgr.declareProperty("RejectProton", m_rejectProton = true);
 

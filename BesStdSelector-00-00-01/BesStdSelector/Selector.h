@@ -3,8 +3,8 @@
 #   Author        : Xin-Xin MA
 #   Email         : xxmawhu@163.com
 # ====================================================*/
-#ifndef _SELECTOR_H
-#define _SELECTOR_H
+#ifndef BesStdSelector_SELECTOR_H
+#define BesStdSelector_SELECTOR_H
 
 #include "BesStdSelector.h"
 #include "Electron.h"

@@ -61,7 +61,7 @@ bool BesStdSelector::Lambda::operator()(CDDecay& aLambda) {
     LambdaInfo lamInfo(aLambda.decay());
     // lamInfo.calculate();
 
-    double mass = lamInfo.mass();
+    double mass = lamInfo.Mass();
     if ((mass <= m_minMass) || (mass >= m_maxMass)) return false;
 
     if (lamInfo.VertexFitChisq() > m_maxChisq) return false;
@@ -71,13 +71,13 @@ bool BesStdSelector::Lambda::operator()(CDDecay& aLambda) {
     }
 
     if (m_useFlightSig) {
-        if (lamInfo.decayLengthRatio() < m_minFlightSig) return false;
+        if (lamInfo.DecayLengthRatio() < m_minFlightSig) return false;
     }
 
     // Must update the moentum of Lambda candiate, the raw momentum of Lambda is
     // just sum of protons' and pion's, the vertex fit can improve the
     // resolution significancely
-    aLambda.setP4(lamInfo.p4());
+    aLambda.setP4(lamInfo.P4());
 
     return true;
 }

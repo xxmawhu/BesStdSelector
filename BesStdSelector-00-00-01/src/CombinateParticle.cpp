@@ -68,7 +68,7 @@ CombinateParticle BesStdSelector::omegaSelector("omegaSelector");
 CombinateParticle BesStdSelector::phiSelector("phiSelector");
 CombinateParticle BesStdSelector::Sigma0Selector("Sigma0Selector");
 CombinateParticle BesStdSelector::Xi0Selector("Xi0Selector");
-CombinateParticle BesStdSelector::XipSelector("XipSelector");
+CombinateParticle BesStdSelector::XimSelector("XimSelector");
 CombinateParticle BesStdSelector::SigmapSelector("SigmapSelector");
 CombinateParticle BesStdSelector::OmegaSelector("OmegaSelector");
 /* ===================================================================<<< */

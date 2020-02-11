@@ -49,7 +49,7 @@ extern EtatoGG etatoGGSelector;
 extern CombinateParticle omegaSelector;
 extern CombinateParticle phiSelector;
 extern CombinateParticle Xi0Selector;
-extern CombinateParticle XipSelector;
+extern CombinateParticle XimSelector;
 extern CombinateParticle Sigma0Selector;
 extern CombinateParticle SigmapSelector;
 extern CombinateParticle OmegaSelector;

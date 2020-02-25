@@ -33,6 +33,8 @@ class CombinateParticle;
 class TypicalTag;
 
 extern GoodChrTrk GoodChrTrkSelector;
+extern GoodChrTrk PrimaryGoodChrTrkSelector;
+extern GoodChrTrk SecondaryGoodChrTrkSelector;
 extern Photon soloPhotonSelector;
 extern Proton primaryProtonSelector;
 extern Proton secondaryProtonSelector;

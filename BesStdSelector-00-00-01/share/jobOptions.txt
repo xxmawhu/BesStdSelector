@@ -7,7 +7,7 @@
 // Pi0EtaToGGRecAlg.PhotonApplyTimeCut = true;
 // Pi0EtaToGGRecAlg.RejectBothInEndcap = true;
 VeeVertex.LambdaReconstruction = false ;
-VeeVertex.KShortReconstruction = true ; 
+// VeeVertex.KShortReconstruction = true ; 
 
 ApplicationMgr.DLLs += {"BesStdSelector"};
 

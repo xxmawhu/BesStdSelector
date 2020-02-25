@@ -178,7 +178,6 @@ bool BesStdSelector::Photon::operator()(CDPhoton& aPhoton) {
 
                     extTrk = (*jtTrk)->extTrack();
                     if (extTrk->emcVolumeNumber() == -1) continue;
-
                     extpos = extTrk->emcPosition();
                     angd1 = extpos.angle(emcpos);
                     if (angd1 < dang) {
@@ -211,7 +210,6 @@ bool BesStdSelector::Photon::FromPi0(
     int tmp_id;
     for (unsigned i = 0; i < _pi0s.size(); ++i) {
         aPi0 = _pi0s[i];
-
         mass = aPi0->unconMass();
         if (mass < m_minPi0Mass || mass > m_maxPi0Mass) continue;
 

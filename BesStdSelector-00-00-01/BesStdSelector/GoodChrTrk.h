@@ -33,7 +33,7 @@
 
 class BesStdSelector::GoodChrTrk : public DCSelectionFunction<CDChargedPion> {
    public:
-    GoodChrTrk();
+    GoodChrTrk(const string& name = "GoodChrTrkSelector");
 
     bool operator()(CDChargedPion& aGCT);
     inline void setCharge(int chr) { m_charge = chr; }

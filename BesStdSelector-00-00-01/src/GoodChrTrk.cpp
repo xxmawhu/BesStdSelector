@@ -41,7 +41,7 @@
 
 #include "BesStdSelector/GoodChrTrk.h"
 
-BesStdSelector::GoodChrTrk::GoodChrTrk() {
+BesStdSelector::GoodChrTrk::GoodChrTrk( const string& name) {
     IJobOptionsSvc* jobSvc;
     Gaudi::svcLocator()->service("JobOptionsSvc", jobSvc);
 
@@ -51,7 +51,7 @@ BesStdSelector::GoodChrTrk::GoodChrTrk() {
     m_propMgr.declareProperty("Vz0Cut", m_VzCut = 10.0);
     m_propMgr.declareProperty("CosThetaCut", m_CosThetaCut = 0.93);
 
-    jobSvc->setMyProperties("PrimaryGoodChrTrkSelector", &m_propMgr);
+    jobSvc->setMyProperties(name, &m_propMgr);
 }
 
 bool BesStdSelector::GoodChrTrk::operator()(CDChargedPion& aGoodChrTrk) {
@@ -87,5 +87,7 @@ bool BesStdSelector::GoodChrTrk::operator()(CDChargedPion& aGoodChrTrk) {
 }
 
 BesStdSelector::GoodChrTrk BesStdSelector::GoodChrTrkSelector;
+BesStdSelector::GoodChrTrk BesStdSelector::PrimaryGoodChrTrkSelector("PrimaryGoodChrTrkSelector");
+BesStdSelector::GoodChrTrk BesStdSelector::SecondaryGoodChrTrkSelector("SecondaryGoodChrTrkSelector");
 /* ===================================================================<<< */
 /* ===================== GoodChrTrk.cpp ends here ======================= */
